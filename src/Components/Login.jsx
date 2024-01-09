@@ -1,17 +1,15 @@
 import { useState } from "react";
-import { Link , useNavigate} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { postData } from "../Services/APICalls";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Login() {
-  const navigate = useNavigate();
   const url = "/auth/login"
   const regEmail = /^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [data, setData] = useState();
 
   const login = async () => {
     if(email === ""){
