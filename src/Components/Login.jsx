@@ -26,10 +26,20 @@ function Login() {
       toast.error("ادخل كلمة المرور");
       return;
     }
-    const res = await postData(url, {email,password});
-    console.log(res);
-    setData(res);
-    console.log(data);
+    const result = await postData(url, {email,password});
+    if(result.status == 401) {
+      toast.error("تأكد من صحة بياناتك");
+      return;
+    }
+    if(result.status == 200) {
+      console.log(result.data);
+      localStorage.setItem("userToken", result.data.token);
+      localStorage.setItem("username", result.data.data.user.name);
+      localStorage.setItem("email", result.data.data.user.email);
+      localStorage.setItem("role", result.data.data.user.role);
+      localStorage.setItem("institutions", result.data.data.user.institutions);
+      location.reload();
+    }
   } 
 
  
