@@ -55,7 +55,7 @@ function Login() {
         </div>
         <div className="mb-6">
           <p className="mb-3 font-bold text-lg">: كلمة المرور</p>
-          <input onChange={(e) => setPassword(e.target.value)} className="border border-[#000000] focus:outline-none text-right px-3 py-2 rounded-lg block w-full" type="text" />
+          <input onChange={(e) => setPassword(e.target.value)} className="border border-[#000000] focus:outline-none text-right px-3 py-2 rounded-lg block w-full" type="password" />
         </div>
         <div className="flex flex-row-reverse justify-between items-center mb-12 ">
           <div className="flex flex-row-reverse gap-3 items-center">

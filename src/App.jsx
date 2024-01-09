@@ -6,6 +6,7 @@ import Login from "./Components/Login";
 import SideMenu from "./Components/SideMenu";
 import MainPage from "./Components/MainPage";
 import OperationCommandsPage from "./Components/OperationCommandsPage";
+import AddOperation from "./Components/AddOperation";
 
 function App() {
   const loggedIn = Boolean(localStorage.getItem("userToken"));
@@ -17,6 +18,7 @@ function App() {
         <Routes>
           <Route path="/" exact element={loggedIn ? <MainPage /> : <Login />} />
           <Route path="/operations" exact element={<OperationCommandsPage />} />
+          <Route path="/add-operation" exact element={<AddOperation />} />
         </Routes>
 
         <ToastContainer autoClose={2500} theme="dark" newestOnTop={true} />
