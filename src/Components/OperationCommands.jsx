@@ -39,7 +39,7 @@ function OperationCommands() {
     },
   ];
   return (
-    <div className="p-6 bg-white rounded-lg mb-6 mx-12">
+    <div className="p-6 bg-white rounded-lg mb-6 mx-6">
       <h2 className="text-right text-[#05004E] font-bold text-2xl mb-6">اوامر التشغيل</h2>
       <div className="flex flex-row-reverse gap-12 w-full justify-between p-2">
         <p className="font-bold text-lg text-right basis-1/5">ID (Code)</p>

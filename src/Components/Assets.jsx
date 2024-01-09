@@ -71,7 +71,7 @@ function Assets() {
     },
   ];
   return (
-    <div className="p-6 bg-white rounded-lg mb-6 mx-12">
+    <div className="p-6 bg-white rounded-lg mb-6 mx-6">
       <h2 className="text-right text-[#05004E] font-bold text-2xl mb-6">الاصول</h2>
       <Swiper
         slidesPerView={4}
@@ -99,7 +99,7 @@ function Assets() {
         }}
         pagination={true}
         modules={[Pagination]}
-        className="max-w-lg xl:max-w-5xl"
+        className="max-w-lg lg:max-w-xl xl:max-w-4xl 2xl:max-w-5xl 4xl:max-w-screen-2xl"
       >
         {cards.map((card, index) => {
           return (

@@ -1,18 +1,22 @@
-import { useState } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import "./App.css";
 
-import SideMenu from "./Components/SideMenu";
+import Login from "./Components/Login";
 import MainPage from "./Components/MainPage";
 
 
+
 function App() {
-  const [count, setCount] = useState(0);
 
   return (
-    <div className="flex flex-row-reverse">
-        <SideMenu />
-        <MainPage />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" exact element={<Login />} />
+        <Route path="/main" exact element={<MainPage />} />
+      </Routes>
+      <ToastContainer autoClose={2500} theme="dark" newestOnTop={true} />
+    </Router>
   );
 }
 
