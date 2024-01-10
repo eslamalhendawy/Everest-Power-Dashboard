@@ -130,7 +130,7 @@ function AddOperation() {
       <div className="bg-white m-6 p-6 rounded-lg">
         <div className="flex flex-row-reverse gap-2 items-center mb-6 pb-6 border-b-2">
           <i className="fa-solid fa-box text-2xl text-[#05004E]"></i>
-          <h2 className="text-right text-[#05004E] font-bold text-2xl ">اضافة امر تشغيل</h2>
+          <h2 className="text-right text-[#05004E] font-bold text-2xl ">اضافة اصل</h2>
         </div>
         <div className="flex flex-row-reverse gap-12 mb-6">
           <div className="basis-1/4">
@@ -142,43 +142,27 @@ function AddOperation() {
             <input className="focus:outline-none border w-full border-black p-3 rounded-lg text-right" type="text" />
           </div>
           <div className="basis-1/4">
-            <p className="text-right text-lg font-semibold mb-4">تاريخ البدأ</p>
-            <input className="focus:outline-none border w-full border-black p-3 rounded-lg text-right" type="date" />
+            <p className="text-right text-lg font-semibold mb-4">نوع الجهاز</p>
+            <input className="focus:outline-none border w-full border-black p-3 rounded-lg text-right" type="text" />
           </div>
         </div>
         <div className="flex flex-row-reverse gap-20">
           <div className="basis-1/2">
-            <div className="flex flex-row-reverse gap-6 mb-6">
-              <div className="basis-1/2">
-                <p className="text-right text-lg font-semibold mb-4">الاصول</p>
-                <input className="focus:outline-none border w-full border-black p-3 rounded-lg text-right" type="text" />
-              </div>
-              <div className="basis-1/2">
-                <p className="text-right text-lg font-semibold mb-4">الحالة</p>
+          <div className="flex flex-row-reverse gap-6 mb-6">
+              <div className="grow">
+                <p className="text-right text-lg font-semibold mb-4">معلومات اضافية</p>
                 <input className="focus:outline-none border w-full border-black p-3 rounded-lg text-right" type="text" />
               </div>
             </div>
             <div className="flex flex-row-reverse gap-6 mb-6">
               <div className="grow">
-                <p className="text-right text-lg font-semibold mb-4">المؤسسة</p>
-                <input className="focus:outline-none border w-full border-black p-3 rounded-lg text-right" type="text" />
-              </div>
-            </div>
-            <div className="flex flex-row-reverse gap-6 mb-6">
-              <div className="grow">
-                <p className="text-right text-lg font-semibold mb-4">المحافظة</p>
-                <select className="focus:outline-none border w-full border-black p-3 rounded-lg text-right" name="" id="">
-                  {governates.map((state) => {
-                    return(
-                      <option key={state.id} value={state.governorate}>{state.governorate}</option>
-                    )
-                  })}
-                </select>
+                <p className="text-right text-lg font-semibold mb-4">صورة ان وجدت</p>
+                <input className="focus:outline-none border w-full border-black p-3 rounded-lg text-right" type="file" />
               </div>
             </div>
           </div>
           <div className="basis-1/2">
-            <p className="text-right text-lg font-semibold mb-4">وصف المشكلة</p>
+            <p className="text-right text-lg font-semibold mb-4">الوصف</p>
             <textarea className="focus:outline-none border w-[85%] h-[80%] block ml-auto resize-none border-black p-3 rounded-lg text-right" name="" id=""></textarea>
           </div>
         </div>

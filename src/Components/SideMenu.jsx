@@ -6,7 +6,7 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 
 function SideMenu() {
   const [selected, setSelected] = useState("main");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
@@ -59,11 +59,11 @@ function SideMenu() {
   return (
     <div className="h-screen w-fit sticky right-0 top-0 shadow-lg p-2 lg:p-6 flex flex-col justify-between items-center">
       <div>
-        <h2 className="text-[#151D48] font-bold lg:text-4xl mb-6">Dashboard</h2>
+        <h2 className="text-[#151D48] text-right font-bold lg:text-4xl mb-6">Dashboard</h2>
         <ul className="flex flex-col space-y-2">
           <Link
             onClick={() => {
-              setSelected("ةشهى");
+              setSelected("main");
               handleClick1(0);
             }}
             to="/"
@@ -112,7 +112,7 @@ function SideMenu() {
               setSelected("asstes");
               handleClick1(2);
             }}
-            to="/asstes"
+            to="/assets"
           >
             <li className={`flex p-3 cursor-pointer rounded-lg flex-row-reverse justify-center lg:justify-start items-center gap-2 text-[#737791] hover:bg-gradient-to-l from-[#4D7DFF] to-[#1C48C2] hover:text-white duration-300 ${selected == "asstes" ? "bg-gradient-to-l from-[#4D7DFF] to-[#1C48C2] text-white" : ""}`}>
               <i className="fa-solid fa-boxes-stacked"></i>
@@ -122,14 +122,18 @@ function SideMenu() {
           </Link>
           <Collapse in={open2} timeout="auto" unmountOnExit>
             <ul className="bg-[#EAEEF899] rounded-lg text-right">
-              <li className="flex flex-row-reverse items-center p-3 gap-2 text-[#737791] cursor-pointer hover:text-[#000000] duration-300">
-                <i className="fa-solid fa-plus"></i>
-                <p className="text-xs lg:text-base">جميع الاصول</p>
-              </li>
-              <li className="flex flex-row-reverse items-center p-3 gap-2 text-[#737791] cursor-pointer hover:text-[#000000] duration-300">
-                <i className="fa-solid fa-plus"></i>
-                <p className="text-xs lg:text-base">اضافة اصل</p>
-              </li>
+              <Link to="/assets">
+                <li className="flex flex-row-reverse items-center p-3 gap-2 text-[#737791] cursor-pointer hover:text-[#000000] duration-300">
+                  <i className="fa-solid fa-plus"></i>
+                  <p className="text-xs lg:text-base">جميع الاصول</p>
+                </li>
+              </Link>
+              <Link to="/add-asset">
+                <li className="flex flex-row-reverse items-center p-3 gap-2 text-[#737791] cursor-pointer hover:text-[#000000] duration-300">
+                  <i className="fa-solid fa-plus"></i>
+                  <p className="text-xs lg:text-base">اضافة اصل</p>
+                </li>
+              </Link>
             </ul>
           </Collapse>
           <Link
@@ -141,7 +145,7 @@ function SideMenu() {
           >
             <li className={`flex p-3 cursor-pointer rounded-lg flex-row-reverse justify-center lg:justify-start items-center gap-2 text-[#737791] hover:bg-gradient-to-l from-[#4D7DFF] to-[#1C48C2] hover:text-white duration-300 ${selected == "maintenance" ? "bg-gradient-to-l from-[#4D7DFF] to-[#1C48C2] text-white" : ""}`}>
               <i className="fa-solid fa-toolbox"></i>
-              <p className="text-right hidden lg:block">صيانة وقائية و تصحيحة</p>
+              <p className="text-right hidden text-nowrap lg:block">صيانة وقائية و تصحيحة</p>
               {open3 ? <ExpandLess /> : <ExpandMore />}
             </li>
           </Link>

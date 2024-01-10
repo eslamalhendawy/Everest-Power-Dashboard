@@ -63,7 +63,7 @@ function Login() {
           <p className="font-bold text-lg text-[#4288F1]">نسيت كلمة المرور ؟</p>
         </div>
         <div className="flex justify-center">
-          <Link onClick={login} to="" className="px-12 py-2 bg-[#2B80FF] text-[#FFFFFF9C] text-lg font-bold rounded-lg hover:bg-[#1C48C2] duration-300">دخول</Link>
+          <button onClick={login} to="" className="px-12 py-2 bg-[#2B80FF] text-[#FFFFFF9C] text-lg font-bold rounded-lg hover:bg-[#1C48C2] duration-300">دخول</button>
         </div>
       </div>
     </div>
