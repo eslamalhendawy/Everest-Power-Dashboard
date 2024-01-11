@@ -12,6 +12,7 @@ function SideMenu() {
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
   const [open4, setOpen4] = useState(false);
+  const [open5, setOpen5] = useState(false);
 
   const handleClick1 = (num) => {
     if (num == 0) {
@@ -19,6 +20,7 @@ function SideMenu() {
       setOpen2(false);
       setOpen3(false);
       setOpen4(false);
+      setOpen5(false);
     }
     if (num == 1) {
       setOpen1(!open1);
@@ -32,6 +34,7 @@ function SideMenu() {
       setOpen1(false);
       setOpen3(false);
       setOpen4(false);
+      setOpen5(false);
       return;
     }
     if (num == 3) {
@@ -39,6 +42,7 @@ function SideMenu() {
       setOpen1(false);
       setOpen2(false);
       setOpen4(false);
+      setOpen5(false);
       return;
     }
     if (num == 4) {
@@ -46,6 +50,15 @@ function SideMenu() {
       setOpen1(false);
       setOpen2(false);
       setOpen3(false);
+      setOpen5(false);
+      return;
+    }
+    if (num == 5) {
+      setOpen5(!open5);
+      setOpen1(false);
+      setOpen2(false);
+      setOpen3(false);
+      setOpen4(false);
       return;
     }
   };
@@ -167,18 +180,55 @@ function SideMenu() {
           </Collapse>
           <Link
             onClick={() => {
-              setSelected("users");
+              setSelected("plans");
               handleClick1(4);
+            }}
+            to="/plans"
+          >
+            <li className={`flex p-3 cursor-pointer rounded-lg flex-row-reverse justify-center lg:justify-start items-center gap-2 text-[#737791] hover:bg-gradient-to-l from-[#4D7DFF] to-[#1C48C2] hover:text-white duration-300 ${selected == "plans" ? "bg-gradient-to-l from-[#4D7DFF] to-[#1C48C2] text-white" : ""}`}>
+              <i className="fa-solid fa-person-digging"></i>
+              <p className="text-right hidden lg:block">خطط العمل</p>
+              {open4 ? <ExpandLess /> : <ExpandMore />}
+            </li>
+          </Link>
+          <Collapse in={open4} timeout="auto" unmountOnExit>
+            <ul className="bg-[#EAEEF899] rounded-lg text-right">
+              <li className="flex flex-row-reverse items-center p-3 gap-2 text-[#737791] cursor-pointer hover:text-[#000000] duration-300">
+                <i className="fa-solid fa-plus"></i>
+                <p className="text-xs lg:text-base">اضافة خطة عمل</p>
+              </li>
+              <li className="flex flex-row-reverse items-center p-3 gap-2 text-[#737791] cursor-pointer hover:text-[#000000] duration-300">
+                <i className="fa-solid fa-plus"></i>
+                <p className="text-xs lg:text-base">اضافة خطة اليوم</p>
+              </li>
+              <li className="flex flex-row-reverse items-center p-3 gap-2 text-[#737791] cursor-pointer hover:text-[#000000] duration-300">
+                <i className="fa-solid fa-plus"></i>
+                <p className="text-xs lg:text-base">خطط خلال اليوم</p>
+              </li>
+              <li className="flex flex-row-reverse items-center p-3 gap-2 text-[#737791] cursor-pointer hover:text-[#000000] duration-300">
+                <i className="fa-solid fa-plus"></i>
+                <p className="text-xs lg:text-base">خطط خلال الشهر</p>
+              </li>
+              <li className="flex flex-row-reverse items-center p-3 gap-2 text-[#737791] cursor-pointer hover:text-[#000000] duration-300">
+                <i className="fa-solid fa-plus"></i>
+                <p className="text-xs lg:text-base">جميع السجلات</p>
+              </li>
+            </ul>
+          </Collapse>
+          <Link
+            onClick={() => {
+              setSelected("users");
+              handleClick1(5);
             }}
             to="/users"
           >
             <li className={`flex p-3 cursor-pointer rounded-lg flex-row-reverse justify-center lg:justify-start items-center gap-2 text-[#737791] hover:bg-gradient-to-l from-[#4D7DFF] to-[#1C48C2] hover:text-white duration-300 ${selected == "users" ? "bg-gradient-to-l from-[#4D7DFF] to-[#1C48C2] text-white" : ""}`}>
               <i className="fa-solid fa-user"></i>
               <p className="text-right hidden lg:block">المستخدمين</p>
-              {open4 ? <ExpandLess /> : <ExpandMore />}
+              {open5 ? <ExpandLess /> : <ExpandMore />}
             </li>
           </Link>
-          <Collapse in={open4} timeout="auto" unmountOnExit>
+          <Collapse in={open5} timeout="auto" unmountOnExit>
             <ul className="bg-[#EAEEF899] rounded-lg text-right">
               <li className="flex flex-row-reverse items-center p-3 gap-2 text-[#737791] cursor-pointer hover:text-[#000000] duration-300">
                 <i className="fa-solid fa-plus"></i>
