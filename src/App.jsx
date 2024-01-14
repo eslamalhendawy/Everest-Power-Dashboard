@@ -14,7 +14,7 @@ function App() {
   const loggedIn = Boolean(localStorage.getItem("userToken"));
 
   return (
-    <div className={loggedIn ? "flex flex-row-reverse" : ""}>
+    <div className={loggedIn ? "flex flex-row-reverse overflow-x-scroll" : ""}>
       <Router>
         {loggedIn ? <SideMenu /> : ""}
         <Routes>

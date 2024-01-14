@@ -43,7 +43,7 @@ function OperationCommands() {
                   <p className="text-xl xl:text-base font-semibold">{info.place}</p>
                 </div>
                 <div className="basis-1/2">
-                    <p className={`text-xl xl:text-sm text-nowrap font-semibold text-right bg-[${info.color}] p-2 ml-auto rounded-lg w-fit`}>{info.condition}</p>
+                    <p className={`text-xl xl:text-sm text-nowrap font-semibold text-right bg-[#${info.condition == "تمت المعالجة" ? "07E0987A" : info.condition == "قيد المعالجة" ? "3268FF" : "FF5656"}] p-2 ml-auto rounded-lg w-fit`} >{info.condition}</p>
                 </div>
               </div>
             );
