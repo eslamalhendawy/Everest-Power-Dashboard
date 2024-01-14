@@ -71,7 +71,7 @@ function Assets() {
     },
   ];
   return (
-    <div className="p-6 bg-white rounded-lg mb-6 mx-6">
+    <div className="p-6 bg-white rounded-lg mb-6 mx-2 lg:mx-6">
       <h2 className="text-right text-[#05004E] font-bold text-2xl mb-6">الاصول</h2>
       <Swiper
         slidesPerView={4}
