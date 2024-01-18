@@ -86,7 +86,7 @@ function OperationCommandsPage() {
         <h2 className="text-right text-[#05004E] font-bold text-2xl mb-12">اوامر التشغيل</h2>
         <div className="flex flex-row-reverse gap-12 w-full justify-between items-center p-2 border-b border-[#CACACABF]">
           <p className="font-bold text-sm xl:text-lg text-right basis-1/6">ID (Code)</p>
-          <p className="font-bold text-sm xl:text-lg text-right basis-1/6">المكان في المستشفى</p>
+          <p className="font-bold text-sm xl:text-lg text-nowrap text-right basis-1/6">المكان في المستشفى</p>
           <p className="font-bold text-sm xl:text-lg text-right basis-1/6">الحالة</p>
           <p className="font-bold text-sm xl:text-lg text-right basis-1/6">تاريخ البدأ</p>
           <p className="font-bold text-sm xl:text-lg text-right basis-1/6">وصف المشكلة</p>

@@ -86,12 +86,12 @@ function OperationCommandsPage() {
         <h2 className="text-right text-[#05004E] font-bold text-2xl mb-12">الاصول</h2>
         <div className="flex flex-row-reverse gap-12 w-full justify-between items-center p-2 border-b border-[#CACACABF]">
           <p className="font-bold text-sm xl:text-lg text-right basis-1/7">ID (Code)</p>
-          <p className="font-bold text-sm xl:text-lg text-right basis-1/7">المكان في المستشفى</p>
+          <p className="font-bold text-sm xl:text-lg text-right text-nowrap basis-1/7">المكان في المستشفى</p>
           <p className="font-bold text-sm xl:text-lg text-right basis-1/7">نوع الجهاز</p>
           <p className="font-bold text-sm xl:text-lg text-right basis-1/7">وصف</p>
           <p className="font-bold text-sm xl:text-lg text-right basis-1/7">صورة الاصل</p>
-          <p className="font-bold text-sm xl:text-lg text-right basis-1/7">معلومات اضافية</p>
-          <p className="font-bold text-sm xl:text-lg text-right basis-1/7">الحذف او التعديل</p>
+          <p className="font-bold text-sm xl:text-lg text-right text-nowrap basis-1/7">معلومات اضافية</p>
+          <p className="font-bold text-sm xl:text-lg text-right text-nowrap basis-1/7">الحذف او التعديل</p>
         </div>
         {list.map((item, index) => {
           return (

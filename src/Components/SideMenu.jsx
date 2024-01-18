@@ -141,13 +141,16 @@ function SideMenu() {
           </Link>
           <Collapse in={open3} timeout="auto" unmountOnExit>
             <ul className="bg-[#EAEEF899] rounded-lg text-right">
+              <Link to="/maintenance">
+                <li className="flex flex-row-reverse items-center p-3 gap-2 text-[#737791] cursor-pointer hover:text-[#000000] duration-300">
+                  <i className="fa-solid fa-plus"></i>
+                  <p className="text-xs lg:text-base">اضافة صيانة وقائية</p>
+                </li>
+              </Link>
+
               <li className="flex flex-row-reverse items-center p-3 gap-2 text-[#737791] cursor-pointer hover:text-[#000000] duration-300">
                 <i className="fa-solid fa-plus"></i>
-                <p className="text-xs lg:text-base">بيان الصيانة خلال الشهر</p>
-              </li>
-              <li className="flex flex-row-reverse items-center p-3 gap-2 text-[#737791] cursor-pointer hover:text-[#000000] duration-300">
-                <i className="fa-solid fa-plus"></i>
-                <p className="text-xs lg:text-base">بنود خلال الشهر</p>
+                <p className="text-xs lg:text-base">بيان الشهر</p>
               </li>
               <li className="flex flex-row-reverse items-center p-3 gap-2 text-[#737791] cursor-pointer hover:text-[#000000] duration-300">
                 <i className="fa-solid fa-plus"></i>

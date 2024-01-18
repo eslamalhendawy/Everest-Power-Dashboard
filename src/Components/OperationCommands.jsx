@@ -49,6 +49,11 @@ function OperationCommands() {
       place: "اطفال",
       condition: "تم الالغاء",
     },
+    {
+      name: "امر التشغيل 3",
+      place: "جراحة",
+      condition: "قيد العمل",
+    },
   ];
   return (
     <div className="xl:flex gap-6 items-center p-6 bg-white rounded-lg mb-6 mx-2 lg:mx-6">
@@ -84,7 +89,7 @@ function OperationCommands() {
                   <p className="text-xl xl:text-base font-semibold">{info.place}</p>
                 </div>
                 <div className="basis-1/2">
-                  <p className={`text-xl xl:text-lg text-nowrap font-semibold text-right p-2 ml-auto rounded-lg w-fit ${info.condition == "انتهاء" ? "bg-[#07E0987A]" : info.condition == "قيد الانتظار" ? "bg-[#0095FF4A]" : "bg-[#FE2835]"}`}>{info.condition}</p>
+                  <p className={`text-xl xl:text-lg w-[120px] text-center font-semibold text-nowrap p-2 ml-auto rounded-lg w-fit ${info.condition == "انتهاء" ? "bg-[#07E0987A]" : info.condition == "قيد الانتظار" ? "bg-[#0095FF4A]" : info.condition == "قيد العمل" ? "bg-[#FFB80040]" : "bg-[#FB3C4761]"}`}>{info.condition}</p>
                 </div>
               </div>
             );

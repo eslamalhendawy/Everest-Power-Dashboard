@@ -8,7 +8,8 @@ import MainPage from "./Components/MainPage";
 import OperationCommandsPage from "./Components/OperationCommandsPage";
 import AddOperation from "./Components/AddOperation";
 import AsstetsPage from "./Components/AsstesPage";
-import AddAsset from "./Components/AddAsset"
+import AddAsset from "./Components/AddAsset";
+import Maintenance from "./Components/Maintenance";
 
 function App() {
   const loggedIn = Boolean(localStorage.getItem("userToken"));
@@ -23,6 +24,7 @@ function App() {
           <Route path="/add-operation" exact element={<AddOperation />} />
           <Route path="/assets" exact element={<AsstetsPage />} />
           <Route path="/add-asset" exact element={<AddAsset />} />
+          <Route path="/maintenance" exact element={<Maintenance />} />
         </Routes>
 
         <ToastContainer autoClose={2500} theme="dark" newestOnTop={true} />

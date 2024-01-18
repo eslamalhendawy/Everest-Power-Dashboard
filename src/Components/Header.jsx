@@ -17,8 +17,8 @@ function Header() {
   };
 
   return (
-    <div className="p-6 flex justify-between items-center mb-6 bg-white">
-      <button className="relative flex justify-center items-center bg-white border focus:outline-none shadow text-grey-600 rounded-lg ">
+    <div className="p-6 flex gap-6 md:justify-between items-center mb-6 bg-white">
+      <button className="relative flex justify-center text-xs text-nowrap md:text-base items-center bg-white border focus:outline-none shadow text-grey-600 rounded-lg ">
         <p className="px-4 py-3" onClick={toggleSelect}>{name}</p>
         <span className="border-l p-2" onClick={toggleSelect}>
           <i className="fa-solid fa-angle-down"></i>
@@ -35,12 +35,12 @@ function Header() {
           </ul>
         </div>
       </button>
-      <div className="flex gap-6 items-center">
-        <div className="p-3 size-[50px] bg-[#f0f0f1] flex justify-center items-center rounded-lg">
+      <div className="flex gap-3 items-center">
+        <div className="p-3  size-[35px] bg-[#f0f0f1] flex justify-center items-center rounded-lg">
           <i className="fa-solid fa-user text-[#3268FF]"></i>
         </div>
         <div>
-          <p className="font-bold capitalize">{userName}</p>
+          <p className="font-bold text-sm text-nowrap capitalize">{userName}</p>
           <p className="text-sm capitalize">{role}</p>
         </div>
         <div className="p-3 size-[30px] bg-[#f0f0f1] flex justify-center items-center rounded-lg">

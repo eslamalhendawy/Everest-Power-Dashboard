@@ -132,7 +132,7 @@ function AddOperation() {
           <i className="fa-solid fa-box text-2xl text-[#05004E]"></i>
           <h2 className="text-right text-[#05004E] font-bold text-2xl ">اضافة امر تشغيل</h2>
         </div>
-        <div className="flex flex-row-reverse gap-12 mb-6">
+        {/* <div className="flex flex-row-reverse gap-12 mb-6">
           <div className="basis-1/4">
             <p className="text-right text-lg font-semibold mb-4">ID (Code)</p>
             <input className="focus:outline-none border w-full border-black p-3 rounded-lg text-right" type="text" />
@@ -180,6 +180,58 @@ function AddOperation() {
           <div className="basis-1/2">
             <p className="text-right text-lg font-semibold mb-4">وصف المشكلة</p>
             <textarea className="focus:outline-none border w-[85%] h-[80%] block ml-auto resize-none border-black p-3 rounded-lg text-right" name="" id=""></textarea>
+          </div>
+        </div> */}
+        <div className="flex flex-col gap-6 md:flex-row-reverse mb-6">
+          <div className="basis-1/2">
+            <p className="text-right text-lg font-semibold mb-4">ID (Code)</p>
+            <input className="focus:outline-none border w-full border-black p-3 rounded-lg text-right" type="text" />
+          </div>
+          <div className="basis-1/2">
+            <p className="text-right text-lg font-semibold mb-4">المكان في المستشفى</p>
+            <input className="focus:outline-none border w-full border-black p-3 rounded-lg text-right" type="text" />
+          </div>
+        </div>
+        <div className="flex flex-col gap-6 md:flex-row-reverse mb-6">
+          <div className="basis-1/2">
+            <p className="text-right text-lg font-semibold mb-4">تاريخ البدأ</p>
+            <input className="focus:outline-none border w-full border-black p-3 rounded-lg text-right" type="date" />
+          </div>
+          <div className="basis-1/2">
+            <p className="text-right text-lg font-semibold mb-4">تاريخ الانتهاء</p>
+            <input className="focus:outline-none border w-full border-black p-3 rounded-lg text-right" type="date" />
+          </div>
+        </div>
+        <div className="flex flex-col gap-6 md:flex-row-reverse mb-6">
+          <div className="basis-1/2">
+            <p className="text-right text-lg font-semibold mb-4">الاصول</p>
+            <input className="focus:outline-none border w-full border-black p-3 rounded-lg text-right" type="text" />
+          </div>
+          <div className="basis-1/2">
+            <p className="text-right text-lg font-semibold mb-4">الحالة</p>
+            <input className="focus:outline-none border w-full border-black p-3 rounded-lg text-right" type="text" />
+          </div>
+        </div>
+        <div className="flex flex-col gap-6 md:items-center md:flex-row-reverse mb-6">
+          <div className="basis-1/2">
+            <p className="text-right text-lg font-semibold mb-4">المؤسسة</p>
+            <input className="focus:outline-none border w-full border-black p-3 rounded-lg text-right" type="text" />
+          </div>
+          <div className="basis-1/2">
+            <p className="text-right text-lg font-semibold mb-4">المحافظة</p>
+            <select className="focus:outline-none border w-full border-black p-3 rounded-lg text-right" name="" id="">
+                  {governates.map((state) => {
+                    return(
+                      <option key={state.id} value={state.governorate}>{state.governorate}</option>
+                    )
+                  })}
+                </select>
+          </div>
+        </div>
+        <div className="flex flex-col md:items-center gap-6 md:flex-row-reverse mb-6">
+          <div className="basis-1/2">
+            <p className="text-right text-lg font-semibold mb-4">وصف المشكلة</p>
+            <textarea className="focus:outline-none border w-[98%] h-full block ml-auto border-black p-3 rounded-lg text-right" name="" id=""></textarea>
           </div>
         </div>
         <div className="flex flex-row-reverse gap-12 mb-6">
