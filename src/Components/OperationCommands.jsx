@@ -58,7 +58,7 @@ function OperationCommands() {
   return (
     <div className="xl:flex gap-6 items-center p-6 bg-white rounded-lg mb-6 mx-2 lg:mx-6">
       <div className="grow flex flex-col items-between">
-        <div className="flex md:justify-start md:flex-row gap-16 mb-12 pl-6">
+        <div className="flex justify-end md:flex-row gap-16 mb-12 pl-6">
           <div className="flex flex-row-reverse items-center gap-2">
             <HalfCircle values={{ name: "Hello", precent: 90 }}></HalfCircle>
             <div className="text-right">
@@ -78,7 +78,7 @@ function OperationCommands() {
         </div>
         <SalesChart />
       </div>
-      <div className="xl:border-l ml-6 pl-6">
+      {/* <div className="xl:border-l ml-6 pl-6">
         <h4 className="text-right text-[#05004E] font-bold text-2xl my-6">اوامر التشغيل</h4>
         <div>
           {list.map((info, index) => {
@@ -89,13 +89,13 @@ function OperationCommands() {
                   <p className="text-xl xl:text-base font-semibold">{info.place}</p>
                 </div>
                 <div className="basis-1/2">
-                  <p className={`text-xl xl:text-lg w-[120px] text-center font-semibold text-nowrap p-2 ml-auto rounded-lg w-fit ${info.condition == "انتهاء" ? "bg-[#07E0987A]" : info.condition == "قيد الانتظار" ? "bg-[#0095FF4A]" : info.condition == "قيد العمل" ? "bg-[#FFB80040]" : "bg-[#FB3C4761]"}`}>{info.condition}</p>
+                  <p className={`text-xl xl:text-lg w-[120px] text-center font-semibold text-nowrap p-2 ml-auto rounded-lg ${info.condition == "انتهاء" ? "bg-[#07E0987A]" : info.condition == "قيد الانتظار" ? "bg-[#0095FF4A]" : info.condition == "قيد العمل" ? "bg-[#FFB80040]" : "bg-[#FB3C4761]"}`}>{info.condition}</p>
                 </div>
               </div>
             );
           })}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
