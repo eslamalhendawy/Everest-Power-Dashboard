@@ -1,4 +1,3 @@
-import React from "react";
 import Header from "./Header";
 
 function OperationCommandsPage() {
@@ -14,64 +13,78 @@ function OperationCommandsPage() {
       id: "9c7ce401",
       place: "اطفال",
       condition: "معطل",
-      description: "اي حاااااجة",
+      description: "نصف الكفائة",
       type: "تحاليل"
     },
     {
       id: "8148d57d",
       place: "جراحة",
       condition: "معطل",
-      description: "صلحني يا غالي",
+      description: "يتطلب تغيير",
       type: "جراحة"
     },
     {
       id: "d7444b86",
       place: "استقبال",
-      condition: "نص نص",
+      condition: "نصف الكفائة",
       description: "يحتاج صيانة",
       type: "تصوير مقطعي"
-    },
-    {
-      id: "bc8d2dc0",
-      place: "عمليات",
-      condition: "مية مية",
-      description: "زي الفل",
-      type: "تحاليل"
     },
     {
       id: "7aad460b",
       place: "عمليات",
       condition: "معطل",
       description: "يحتاج صيانة",
-      type: "جراحة"
+      type: "اشعة"
     },
     {
       id: "9c7ce401",
       place: "اطفال",
       condition: "معطل",
-      description: "اي حاااااجة",
-      type: "اشعة"
+      description: "نصف الكفائة",
+      type: "تحاليل"
     },
     {
       id: "8148d57d",
       place: "جراحة",
       condition: "معطل",
-      description: "صلحني يا غالي",
-      type: "اشعة"
+      description: "يتطلب تغيير",
+      type: "جراحة"
     },
     {
       id: "d7444b86",
       place: "استقبال",
-      condition: "نص نص",
+      condition: "نصف الكفائة",
       description: "يحتاج صيانة",
       type: "تصوير مقطعي"
     },
     {
-      id: "bc8d2dc0",
+      id: "7aad460b",
       place: "عمليات",
-      condition: "مية مية",
-      description: "زي الفل",
+      condition: "معطل",
+      description: "يحتاج صيانة",
+      type: "اشعة"
+    },
+    {
+      id: "9c7ce401",
+      place: "اطفال",
+      condition: "معطل",
+      description: "نصف الكفائة",
+      type: "تحاليل"
+    },
+    {
+      id: "8148d57d",
+      place: "جراحة",
+      condition: "معطل",
+      description: "يتطلب تغيير",
       type: "جراحة"
+    },
+    {
+      id: "d7444b86",
+      place: "استقبال",
+      condition: "نصف الكفائة",
+      description: "يحتاج صيانة",
+      type: "تصوير مقطعي"
     },
   ];
 
