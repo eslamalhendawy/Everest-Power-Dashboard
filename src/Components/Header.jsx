@@ -1,4 +1,5 @@
 import { useState } from "react";
+import MobileSideMenu from "./MobileSideMenu";
 
 function Header() {
   const userName = localStorage.getItem("username");
@@ -17,7 +18,7 @@ function Header() {
   };
 
   return (
-    <div className="p-6 flex gap-6 md:justify-between items-center mb-6 bg-white">
+    <div className="p-6 flex gap-6 justify-between items-center mb-6 bg-white">
       <button className="relative flex justify-center text-xs text-nowrap md:text-base items-center bg-white border focus:outline-none shadow text-grey-600 rounded-lg ">
         <p className="px-4 py-3" onClick={toggleSelect}>{name}</p>
         <span className="border-l p-2" onClick={toggleSelect}>
@@ -46,6 +47,7 @@ function Header() {
         <div className="p-3 size-[30px] bg-[#f0f0f1] flex justify-center items-center rounded-lg">
           <i className="fa-regular fa-bell text-[#3268FF]"></i>
         </div>
+        <MobileSideMenu />
       </div>
     </div>
   );

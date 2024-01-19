@@ -6,7 +6,7 @@ function MainPage() {
   return (
     <div className="grow bg-[#F8F9FA]">
       <Header />
-      <Assets />
+      {/* <Assets /> */}
       <OperationCommands />
     </div>
   );

@@ -45,17 +45,17 @@ function SalesChart() {
   return (
     <div>
       <div className="flex flex-row-reverse mb-6 items-center justify-between">
-        <h3 className="text-right text-[#05004E] font-semibold text-2xl">عدد اوامر التشغيل خلال الشهر</h3>
+        <h3 className="text-right text-[#05004E] font-semibold text-lg">بيان اوامر التشغيل خلال الشهر</h3>
         <button className="relative flex justify-center items-center bg-white border focus:outline-none shadow text-grey-600 rounded-lg ">
-          <p className="px-4 py-3" onClick={toggleSelect}>
+          <p className="px-4 py-3 text-sm" onClick={toggleSelect}>
             شهري
           </p>
-          <span className="border-l p-2" onClick={toggleSelect}>
+          <span className="border-l p-2 text-sm" onClick={toggleSelect}>
             <i className="fa-solid fa-angle-down"></i>
           </span>
           <div className={`absolute top-full min-w-full w-max bg-white shadow-md mt-1 rounded-lg z-[2] ${select ? "block" : "hidden"}`}>
             <ul className="text-right border rounded-lg">
-              <li className="px-4 py-3 hover:bg-gray-100 border-b">شهري</li>
+              <li className="px-4 py-3 hover:bg-gray-100 border-b text-center ">شهري</li>
             </ul>
           </div>
         </button>
