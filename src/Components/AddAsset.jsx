@@ -152,7 +152,7 @@ function AddOperation() {
             <input className="focus:outline-none border w-full border-black p-3 rounded-lg text-right" type="text" />
           </div>
         </div>
-        <div className="flex flex-col-reverse md:items-center gap-6 md:flex-row-reverse mb-6">
+        <div className="flex flex-col-reverse md:items-start gap-6 md:flex-row-reverse mb-6">
           <div className="basis-1/2">
             <p className="text-right text-lg font-semibold mb-4">الوصف</p>
             <textarea className="focus:outline-none border w-[98%] h-full block ml-auto border-black p-3 rounded-lg text-right" name="" id=""></textarea>
