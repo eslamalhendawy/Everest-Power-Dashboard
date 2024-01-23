@@ -11,10 +11,17 @@ function SalesChart() {
     labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "26", "27", "28", "29", "30"],
     datasets: [
       {
-        label: "Sales",
+        label: "Finished",
         data: [3, 6, 9, 12, 20, 15],
-        backgroundColor: "#fdc475",
-        borderColor: "#fdc475",
+        backgroundColor: "#3366CC",
+        borderColor: "#3366CC",
+        borderWidth: 1,
+      },
+      {
+        label: "Total",
+        data: [3, 6, 9, 12, 20, 15],
+        backgroundColor: "#CDD5EB",
+        borderColor: "#CDD5EB",
         borderWidth: 1,
       },
     ],
@@ -45,7 +52,7 @@ function SalesChart() {
   return (
     <div>
       <div className="flex flex-row-reverse mb-6 items-center justify-between">
-        <h3 className="text-right text-[#05004E] font-semibold text-lg">بيان اوامر التشغيل خلال الشهر</h3>
+        <h3 className="text-right text-[#05004E] font-semibold text-lg">مؤشر الاداء خلال الشهر</h3>
         <button className="relative flex justify-center items-center bg-white border focus:outline-none shadow text-grey-600 rounded-lg ">
           <p className="px-4 py-3 text-sm" onClick={toggleSelect}>
             شهري
