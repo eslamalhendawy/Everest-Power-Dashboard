@@ -13,6 +13,10 @@ import AddOperation from "./Components/AddOperation";
 import AsstetsPage from "./Components/AsstesPage";
 import AddAsset from "./Components/AddAsset";
 import Maintenance from "./Components/Maintenance";
+import AddUser from "./Components/AddUser";
+import AddPlan from "./Components/AddPlan";
+import AllUsers from "./Components/AllUsers";
+import AllActivities from "./Components/AllActivities";
 
 function App() {
   const initialState = {
@@ -45,6 +49,10 @@ function App() {
               <Route path="/assets" exact element={<AsstetsPage />} />
               <Route path="/add-asset" exact element={<AddAsset />} />
               <Route path="/maintenance" exact element={<Maintenance />} />
+              <Route path="/add-user" exact element={<AddUser />} />
+              <Route path="/add-plan" exact element={<AddPlan />} />
+              <Route path="/users" exact element={<AllUsers />} />
+              <Route path="/all-activities" exact element={<AllActivities />} />
             </Routes>
 
             <ToastContainer autoClose={2500} theme="dark" newestOnTop={true} />

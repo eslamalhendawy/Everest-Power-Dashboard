@@ -44,10 +44,14 @@ function Maintenance() {
             <p className="text-right text-lg font-semibold mb-4">الموقع</p>
             <input className="focus:outline-none border w-[98%] block ml-auto border-black p-3 rounded-lg text-right" type="text" />
           </div>
+          <div className="basis-1/2">
+            <p className="text-right text-lg font-semibold mb-4">ملاحظات</p>
+            <input className="focus:outline-none border w-[98%] block ml-auto border-black p-3 rounded-lg text-right" type="text" />
+          </div>
         </div>
         <div className="flex flex-row-reverse gap-6 mt-6">
           <button className="border-[2px] text-white hover:text-white bg-[#2B80FF] hover:bg-[#1C48C2]  duration-300 border-[#2B80FF] hover:border-[#1C48C2] py-2 px-12 group rounded-lg">اضافة</button>
-          <button className="border-[2px]  text-[#FF5656] hover:text-white hover:bg-[#FF5656] duration-300 border-[#FF5656] py-2 px-12 group rounded-lg">حذف</button>
+          <button className="border-[2px]  text-[#FF5656] hover:text-white hover:bg-[#FF5656] duration-300 border-[#FF5656] py-2 px-12 group rounded-lg">الغاء</button>
         </div>
       </div>
     </div>

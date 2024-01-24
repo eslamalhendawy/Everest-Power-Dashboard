@@ -1,128 +1,6 @@
 import Header from "./Header";
 
 function AddOperation() {
-  const governates = [
-    {
-      id: 0,
-      governorate: "المحافظة",
-    },
-    {
-      id: 1,
-      governorate: "القاهرة",
-    },
-    {
-      id: 2,
-      governorate: "اسوان",
-    },
-    {
-      id: 3,
-      governorate: "اسيوط",
-    },
-    {
-      id: 4,
-      governorate: "الاسكندرية",
-    },
-    {
-      id: 5,
-      governorate: "الاسماعلية",
-    },
-    {
-      id: 6,
-      governorate: "الاقصر",
-    },
-    {
-      id: 7,
-      governorate: "البحر الاحمر",
-    },
-    {
-      id: 8,
-      governorate: "البحيرة",
-    },
-    {
-      id: 9,
-      governorate: "الجيزة",
-    },
-    {
-      id: 10,
-      governorate: "الدقهلية",
-    },
-    {
-      id: 11,
-      governorate: "السويس",
-    },
-    {
-      id: 12,
-      governorate: "الشرقية",
-    },
-    {
-      id: 13,
-      governorate: "الغربية",
-    },
-    {
-      id: 14,
-      governorate: "الفيوم",
-    },
-    {
-      id: 15,
-      governorate: "القليوبية",
-    },
-    {
-      id: 16,
-      governorate: "المنوفية",
-    },
-    {
-      id: 17,
-      governorate: "المنيا",
-    },
-    {
-      id: 18,
-      governorate: "الوادي الجديد",
-    },
-    {
-      id: 19,
-      governorate: "بني سويف",
-    },
-    {
-      id: 20,
-      governorate: "بورسعيد",
-    },
-    {
-      id: 21,
-      governorate: "جنوب سيناء",
-    },
-    {
-      id: 22,
-      governorate: "حلوان",
-    },
-    {
-      id: 23,
-      governorate: "دمياط",
-    },
-    {
-      id: 24,
-      governorate: "سوهاج",
-    },
-    {
-      id: 25,
-      governorate: "شمال سيناء",
-    },
-    {
-      id: 26,
-      governorate: "قنا",
-    },
-    {
-      id: 27,
-      governorate: "كفر الشيخ",
-    },
-    {
-      id: 28,
-      governorate: "مطروح",
-    },
-    {
-      id: 29,
-      governorate: "السادس من اكتوبر",
-    },
-  ];
 
   return (
     <div className="grow bg-[#F8F9FA]">
@@ -159,12 +37,12 @@ function AddOperation() {
           </div>
           <div className="basis-1/2">
             <p className="text-right text-lg font-semibold mb-4">صورة ان وجدت</p>
-            <input className="focus:outline-none border w-[98%] ml-auto block  border-black p-3 rounded-lg text-right" type="file" />
+            <input className="cursor-pointer focus:outline-none border w-[98%] ml-auto block  border-black p-3 rounded-lg text-right" type="file" />
           </div>
         </div>
         <div className="flex flex-row-reverse gap-6 mb-6">
           <button className="border-[2px] text-white hover:text-white bg-[#2B80FF] hover:bg-[#1C48C2]  duration-300 border-[#2B80FF] hover:border-[#1C48C2] py-2 px-12 group rounded-lg">اضافة</button>
-          <button className="border-[2px] text-[#FF5656] hover:text-white hover:bg-[#FF5656] duration-300 border-[#FF5656] py-2 px-12 group rounded-lg">حذف</button>
+          <button className="border-[2px] text-[#FF5656] hover:text-white hover:bg-[#FF5656] duration-300 border-[#FF5656] py-2 px-12 group rounded-lg">الغاء</button>
         </div>
       </div>
     </div>

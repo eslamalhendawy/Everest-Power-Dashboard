@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import DispatchContext from "../DispatchContext";
 import { Link, useNavigate } from "react-router-dom";
 import Collapse from "@mui/material/Collapse";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import Drawer from "@mui/material/SwipeableDrawer";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function MobileSideMenu() {
+  const appDispatch = useContext(DispatchContext);
   const [openMenu, setOpen] = useState(false);
   const toggleMenu = (openStatus) => (event) => {
     if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
@@ -20,9 +24,10 @@ function MobileSideMenu() {
   const [open, setOpen0] = useState();
 
   const logout = () => {
+    toast.info("تم تسجيل الخروج");
+    appDispatch({ type: "logout" });
     localStorage.clear();
     navigate("/");
-    location.reload();
   };
 
   return (
@@ -87,7 +92,7 @@ function MobileSideMenu() {
               <div
                 onClick={() => {
                   setSelected("asstes");
-                  setOpen0(2)
+                  setOpen0(2);
                 }}
               >
                 <li className={`flex p-3 cursor-pointer rounded-lg flex-row-reverse justify-between items-center gap-2 text-[#737791] hover:bg-gradient-to-l from-[#4D7DFF] to-[#1C48C2] hover:text-white duration-300 ${selected == "asstes" ? "bg-gradient-to-l from-[#4D7DFF] to-[#1C48C2] text-white" : ""}`}>
@@ -98,7 +103,7 @@ function MobileSideMenu() {
                   {open == 2 ? <ExpandLess /> : <ExpandMore />}
                 </li>
               </div>
-              <Collapse in={open == 2 } timeout="auto" unmountOnExit>
+              <Collapse in={open == 2} timeout="auto" unmountOnExit>
                 <ul className="bg-[#EAEEF899] rounded-lg text-right">
                   <Link to="/assets">
                     <li className="flex flex-row-reverse items-center p-3 gap-2 text-[#737791] cursor-pointer hover:text-[#000000] duration-300">
@@ -117,7 +122,7 @@ function MobileSideMenu() {
               <div
                 onClick={() => {
                   setSelected("maintenance");
-                  setOpen0(3)
+                  setOpen0(3);
                 }}
               >
                 <li className={`flex p-3 cursor-pointer rounded-lg flex-row-reverse justify-between items-center gap-2 text-[#737791] hover:bg-gradient-to-l from-[#4D7DFF] to-[#1C48C2] hover:text-white duration-300 ${selected == "maintenance" ? "bg-gradient-to-l from-[#4D7DFF] to-[#1C48C2] text-white" : ""}`}>
@@ -151,7 +156,7 @@ function MobileSideMenu() {
               <div
                 onClick={() => {
                   setSelected("plans");
-                  setOpen0(4)
+                  setOpen0(4);
                 }}
               >
                 <li className={`flex p-3 cursor-pointer rounded-lg flex-row-reverse justify-between items-center gap-2 text-[#737791] hover:bg-gradient-to-l from-[#4D7DFF] to-[#1C48C2] hover:text-white duration-300 ${selected == "plans" ? "bg-gradient-to-l from-[#4D7DFF] to-[#1C48C2] text-white" : ""}`}>
@@ -164,10 +169,13 @@ function MobileSideMenu() {
               </div>
               <Collapse in={open == 4} timeout="auto" unmountOnExit>
                 <ul className="bg-[#EAEEF899] rounded-lg text-right">
-                  <li className="flex flex-row-reverse items-center p-3 gap-2 text-[#737791] cursor-pointer hover:text-[#000000] duration-300">
-                    <i className="fa-solid fa-plus"></i>
-                    <p className="text-xs lg:text-base">اضافة خطة عمل</p>
-                  </li>
+                  <Link to="/add-plan">
+                    <li className="flex flex-row-reverse items-center p-3 gap-2 text-[#737791] cursor-pointer hover:text-[#000000] duration-300">
+                      <i className="fa-solid fa-plus"></i>
+                      <p className="text-xs lg:text-base">اضافة خطة عمل</p>
+                    </li>
+                  </Link>
+
                   <li className="flex flex-row-reverse items-center p-3 gap-2 text-[#737791] cursor-pointer hover:text-[#000000] duration-300">
                     <i className="fa-solid fa-plus"></i>
                     <p className="text-xs lg:text-base">اضافة خطة اليوم</p>
@@ -189,7 +197,7 @@ function MobileSideMenu() {
               <div
                 onClick={() => {
                   setSelected("users");
-                  setOpen0(5)
+                  setOpen0(5);
                 }}
               >
                 <li className={`flex p-3 cursor-pointer rounded-lg flex-row-reverse justify-between items-center gap-2 text-[#737791] hover:bg-gradient-to-l from-[#4D7DFF] to-[#1C48C2] hover:text-white duration-300 ${selected == "users" ? "bg-gradient-to-l from-[#4D7DFF] to-[#1C48C2] text-white" : ""}`}>
@@ -202,13 +210,19 @@ function MobileSideMenu() {
               </div>
               <Collapse in={open == 5} timeout="auto" unmountOnExit>
                 <ul className="bg-[#EAEEF899] rounded-lg text-right">
+                  <Link to="/add-user">
+                    <li className="flex flex-row-reverse items-center p-3 gap-2 text-[#737791] cursor-pointer hover:text-[#000000] duration-300">
+                      <i className="fa-solid fa-plus"></i>
+                      <p className="text-xs lg:text-base">اضافة مستخدم</p>
+                    </li>
+                  </Link>
                   <li className="flex flex-row-reverse items-center p-3 gap-2 text-[#737791] cursor-pointer hover:text-[#000000] duration-300">
                     <i className="fa-solid fa-plus"></i>
                     <p className="text-xs lg:text-base">جميع المستخدمين</p>
                   </li>
                   <li className="flex flex-row-reverse items-center p-3 gap-2 text-[#737791] cursor-pointer hover:text-[#000000] duration-300">
                     <i className="fa-solid fa-plus"></i>
-                    <p className="text-xs lg:text-base">اضافة مستخدم</p>
+                    <p className="text-xs lg:text-base">عرض جميع الانشطة</p>
                   </li>
                 </ul>
               </Collapse>

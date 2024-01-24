@@ -14,8 +14,8 @@ function SideMenu() {
   const [open, setOpen0] = useState();
 
   const logout = () => {
-    toast.info("تم تسجيل الخروج")
-    appDispatch({type: "logout"});
+    toast.info("تم تسجيل الخروج");
+    appDispatch({ type: "logout" });
     localStorage.clear();
     navigate("/");
   };
@@ -76,7 +76,7 @@ function SideMenu() {
           <Link
             onClick={() => {
               setSelected("asstes");
-              setOpen0(2)
+              setOpen0(2);
             }}
             to="/assets"
           >
@@ -107,14 +107,14 @@ function SideMenu() {
           <Link
             onClick={() => {
               setSelected("maintenance");
-              setOpen0(3)
+              setOpen0(3);
             }}
             to="/maintenance"
           >
             <li className={`flex p-3 cursor-pointer rounded-lg flex-row-reverse justify-between items-center gap-2 text-[#737791] hover:bg-gradient-to-l from-[#4D7DFF] to-[#1C48C2] hover:text-white duration-300 ${selected == "maintenance" ? "bg-gradient-to-l from-[#4D7DFF] to-[#1C48C2] text-white" : ""}`}>
               <div className="flex flex-row-reverse items-center gap-2">
                 <i className="fa-solid fa-toolbox"></i>
-                <p className="text-right hidden text-nowrap lg:block">صيانة وقائية و تصحيحة</p>
+                <p className="text-right hidden text-nowrap lg:block">صيانة وقائية</p>
               </div>
 
               {open == 3 ? <ExpandLess /> : <ExpandMore />}
@@ -142,9 +142,9 @@ function SideMenu() {
           <Link
             onClick={() => {
               setSelected("plans");
-              setOpen0(4)
+              setOpen0(4);
             }}
-            to="/plans"
+            to="/add-plan"
           >
             <li className={`flex p-3 cursor-pointer rounded-lg flex-row-reverse justify-between items-center gap-2 text-[#737791] hover:bg-gradient-to-l from-[#4D7DFF] to-[#1C48C2] hover:text-white duration-300 ${selected == "plans" ? "bg-gradient-to-l from-[#4D7DFF] to-[#1C48C2] text-white" : ""}`}>
               <div className="flex flex-row-reverse gap-2 items-center">
@@ -181,9 +181,9 @@ function SideMenu() {
           <Link
             onClick={() => {
               setSelected("users");
-              setOpen0(5)
+              setOpen0(5);
             }}
-            to="/users"
+            to="/add-user"
           >
             <li className={`flex p-3 cursor-pointer rounded-lg flex-row-reverse justify-between items-center gap-2 text-[#737791] hover:bg-gradient-to-l from-[#4D7DFF] to-[#1C48C2] hover:text-white duration-300 ${selected == "users" ? "bg-gradient-to-l from-[#4D7DFF] to-[#1C48C2] text-white" : ""}`}>
               <div className="flex flex-row-reverse items-center gap-2">
@@ -195,13 +195,22 @@ function SideMenu() {
           </Link>
           <Collapse in={open == 5} timeout="auto" unmountOnExit>
             <ul className="bg-[#EAEEF899] rounded-lg text-right">
+              <Link to="/add-user">
+                <li className="flex flex-row-reverse items-center p-3 gap-2 text-[#737791] cursor-pointer hover:text-[#000000] duration-300">
+                  <i className="fa-solid fa-plus"></i>
+                  <p className="text-xs lg:text-base">اضافة مستخدم</p>
+                </li>
+              </Link>
+              <Link to="/users">
+                <li className="flex flex-row-reverse items-center p-3 gap-2 text-[#737791] cursor-pointer hover:text-[#000000] duration-300">
+                  <i className="fa-solid fa-plus"></i>
+                  <p className="text-xs lg:text-base">جميع المستخدمين</p>
+                </li>
+              </Link>
+
               <li className="flex flex-row-reverse items-center p-3 gap-2 text-[#737791] cursor-pointer hover:text-[#000000] duration-300">
                 <i className="fa-solid fa-plus"></i>
-                <p className="text-xs lg:text-base">جميع المستخدمين</p>
-              </li>
-              <li className="flex flex-row-reverse items-center p-3 gap-2 text-[#737791] cursor-pointer hover:text-[#000000] duration-300">
-                <i className="fa-solid fa-plus"></i>
-                <p className="text-xs lg:text-base">اضافة مستخدم</p>
+                <p className="text-xs lg:text-base">عرض جميع الانشطة</p>
               </li>
             </ul>
           </Collapse>
