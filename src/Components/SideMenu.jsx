@@ -207,11 +207,12 @@ function SideMenu() {
                   <p className="text-xs lg:text-base">جميع المستخدمين</p>
                 </li>
               </Link>
-
-              <li className="flex flex-row-reverse items-center p-3 gap-2 text-[#737791] cursor-pointer hover:text-[#000000] duration-300">
-                <i className="fa-solid fa-plus"></i>
-                <p className="text-xs lg:text-base">عرض جميع الانشطة</p>
-              </li>
+              <Link to="/all-activities">
+                <li className="flex flex-row-reverse items-center p-3 gap-2 text-[#737791] cursor-pointer hover:text-[#000000] duration-300">
+                  <i className="fa-solid fa-plus"></i>
+                  <p className="text-xs lg:text-base">عرض جميع الانشطة</p>
+                </li>
+              </Link>
             </ul>
           </Collapse>
         </ul>

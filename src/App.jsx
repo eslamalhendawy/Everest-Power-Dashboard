@@ -54,7 +54,6 @@ function App() {
               <Route path="/users" exact element={<AllUsers />} />
               <Route path="/all-activities" exact element={<AllActivities />} />
             </Routes>
-
             <ToastContainer autoClose={2500} theme="dark" newestOnTop={true} />
           </Router>
         </div>
