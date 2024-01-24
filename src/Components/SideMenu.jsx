@@ -1,18 +1,23 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import DispatchContext from "../DispatchContext";
 import { Link, useNavigate } from "react-router-dom";
 import Collapse from "@mui/material/Collapse";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function SideMenu() {
+  const appDispatch = useContext(DispatchContext);
   const [selected, setSelected] = useState("main");
   const navigate = useNavigate();
   const [open, setOpen0] = useState();
 
   const logout = () => {
+    toast.info("تم تسجيل الخروج")
+    appDispatch({type: "logout"});
     localStorage.clear();
     navigate("/");
-    location.reload();
   };
 
   return (

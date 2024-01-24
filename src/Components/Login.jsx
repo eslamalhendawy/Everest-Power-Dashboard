@@ -1,11 +1,12 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useContext } from "react";
+import DispatchContext from "../DispatchContext";
 import { postData } from "../Services/APICalls";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Login() {
+  const appDispatch = useContext(DispatchContext);
   const url = "/auth/login"
   const regEmail = /^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/;
   const [email, setEmail] = useState("");
@@ -24,18 +25,20 @@ function Login() {
       toast.error("ادخل كلمة المرور");
       return;
     }
+    toast.info("جاري تسجيل الدخول");
     const result = await postData(url, {email,password});
     if(result.status == 401) {
       toast.error("تأكد من صحة بياناتك");
       return;
     }
     if(result.status == 200) {
+      appDispatch({type: "login"});
       localStorage.setItem("userToken", result.data.token);
       localStorage.setItem("username", result.data.data.user.name);
       localStorage.setItem("email", result.data.data.user.email);
       localStorage.setItem("role", result.data.data.user.role);
       localStorage.setItem("institutions", JSON.stringify(result.data.data.user.institutions));
-      location.reload();
+      toast.success("تم تسجيل الدخول بنجاح")
     }
   } 
 

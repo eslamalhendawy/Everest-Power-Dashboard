@@ -50,7 +50,7 @@ function SalesChart() {
   };
 
   return (
-    <div>
+    <div className="container">
       <div className="flex flex-row-reverse mb-6 items-center justify-between">
         <h3 className="text-right text-[#05004E] font-semibold text-lg">مؤشر الاداء خلال الشهر</h3>
         <button className="relative flex justify-center items-center bg-white border focus:outline-none shadow text-grey-600 rounded-lg ">
