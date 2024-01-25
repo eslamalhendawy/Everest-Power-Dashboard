@@ -6,7 +6,7 @@ function Header() {
   const username = localStorage.getItem("name");
   const role = localStorage.getItem("role");
   const institutions = JSON.parse(localStorage.getItem("Institutions"));
-  const [name, setName] = useState("اسم المستشفى");
+  const [name, setName] = useState("اسم المؤسسة");
 
   const toggleSelect = () => {
     setSelect(!select);

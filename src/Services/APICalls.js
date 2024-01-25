@@ -29,6 +29,22 @@ export const getData = async (url,token) => {
     return result
 }
 
+export const addOperation = async (token, data) => {
+  let result = {};
+  await axios.post(`${baseURL}/orders`,
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
+  }, data)
+  .then((res) => {
+    console.log(res);
+  })
+  .catch((e) => {
+    console.log(e);
+  })
+}
+
 export const getOperationCommands = async (id) => {
   let results = {};
   await axios.get(`https://erpsystem.pildextech.cf/api/v1/devices/institution/${id}`)
