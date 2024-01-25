@@ -21,12 +21,21 @@ import AllActivities from "./Components/AllActivities";
 function App() {
   const initialState = {
     loggedIn: Boolean(localStorage.getItem("userToken")),
+    user:{
+      name: "",
+      role: "",
+      institutions: [],
+      photo: "",
+      email: "",
+
+    }
   };
 
   function myReducer(draft, action) {
     switch (action.type) {
       case "login":
         draft.loggedIn = true;
+        draft.user = action.data;
         break;
       case "logout":
         draft.loggedIn = false;

@@ -1,7 +1,48 @@
-
+import { useEffect } from "react";
+import axios from "axios";
 import Header from "./Header";
+import { Table } from "antd";
+
+const columns = [
+  {
+    title: "الحذف او التعديل",
+    key: "action",
+    render: () => (
+      <div className="flex justify-center gap-2">
+        <button>
+          <i className="fa-solid fa-pen bg-[#0EB70B] text-white p-2 rounded-lg"></i>
+        </button>
+        <button>
+          <i className="fa-solid fa-trash bg-[#CC0F1F] text-white p-2 rounded-lg"></i>
+        </button>
+      </div>
+    ),
+  },
+  {title: "الوصف", dataIndex: "description", key: "description"},
+  { title: "تاريخ الانتهاء", dataIndex: "endDate", key: "endDate" },
+  { title: "تاريخ البدأ", dataIndex: "startDate", key: "startDate" },
+  { title: "الحالة", dataIndex: "state", key: "state" },
+  { title: "المكان في المستشفى", dataIndex: "place", key: "place" },
+  {title: "الاصول", dataIndex: "devices", key: "devices"},
+  { title: "ID (Code)", dataIndex: "id", key: "id" },
+];
+
+const data = [
+  {id: "adad5as4d54a", place: "عمليات", state: "معطل",},
+  { name: "احمد فريد", email: "ahmedfaried@gmail.com", role: "Admin", institutes: "رأس سدر" },
+  { name: "احمد فريد", email: "ahmedfaried@gmail.com", role: "Admin", institutes: "رأس سدر" },
+];
 
 function OperationCommandsPage() {
+  const url = "https://erpsystem.pildextech.cf/";
+
+  useEffect(() => {
+    const fetchData = async () => {
+
+    }
+  })
+
+
   const list = [
     {
       id: "7aad460b",
@@ -98,31 +139,7 @@ function OperationCommandsPage() {
           <input type="text" className="bg-[#ECECEC] w-full focus:outline-none text-right text-[#3268FF]" placeholder="...البحث هنا" />
         </div>
         <h2 className="text-right text-[#05004E] font-bold text-2xl mb-12">اوامر التشغيل</h2>
-        <div className="flex flex-row-reverse gap-12 w-full justify-between items-center p-2 border-b border-[#CACACABF]">
-          <p className="font-bold text-sm xl:text-lg text-right basis-1/6">ID (Code)</p>
-          <p className="font-bold text-sm xl:text-lg text-nowrap text-right basis-1/6">المكان في المستشفى</p>
-          <p className="font-bold text-sm xl:text-lg text-right basis-1/6">الحالة</p>
-          <p className="font-bold text-sm xl:text-lg text-right basis-1/6">تاريخ البدأ</p>
-          <p className="font-bold text-sm xl:text-lg text-right basis-1/6">وصف المشكلة</p>
-          <p className="font-bold text-sm xl:text-lg text-right basis-1/6">الحذف او التعديل</p>
-        </div>
-        <div className="overflow-x-scroll" >
-          {list.map((item, index) => {
-            return (
-              <div key={index} className="flex flex-row-reverse gap-12 w-full justify-between items-center px-2 py-8 border-b border-[#CACACABF]">
-                <p className="text-sm lg:text-base font-semibold text-right basis-1/6">{item.id}</p>
-                <p className="text-sm lg:text-base font-semibold text-right basis-1/6">{item.place}</p>
-                <p className="text-sm lg:text-base font-semibold text-right basis-1/6">{item.condition}</p>
-                <p className="text-sm lg:text-base font-semibold text-right basis-1/6">{item.date}</p>
-                <p className="text-sm lg:text-base font-semibold text-right basis-1/6">{item.description}</p>
-                <div className="flex flex-row-reverse gap-2 xl:gap-6 text-lg items-center text-center basis-1/6">
-                  <i className="fa-solid fa-trash p-2 lg:p-3 bg-[#CC0F1F] text-white rounded-lg cursor-pointer"></i>
-                  <i className="fa-solid fa-pen p-2 lg:p-3 bg-[#0EB70B] text-white rounded-lg cursor-pointer"></i>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+        <Table columns={columns} dataSource={data} pagination={false} />
       </div>
     </div>
   );

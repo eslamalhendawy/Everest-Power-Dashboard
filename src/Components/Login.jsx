@@ -32,13 +32,10 @@ function Login() {
       return;
     }
     if(result.status == 200) {
-      appDispatch({type: "login"});
+      // console.log(result.data.data.user);
+      appDispatch({type: "login", data: {name :result.data.data.user.name, role: result.data.data.user.role, email: result.data.data.user.email, institutions: result.data.data.user.institutions}});
       localStorage.setItem("userToken", result.data.token);
-      localStorage.setItem("username", result.data.data.user.name);
-      localStorage.setItem("email", result.data.data.user.email);
-      localStorage.setItem("role", result.data.data.user.role);
-      localStorage.setItem("institutions", JSON.stringify(result.data.data.user.institutions));
-      toast.success("تم تسجيل الدخول بنجاح")
+      toast.success("تم تسجيل الدخول بنجاح");
     }
   } 
 
