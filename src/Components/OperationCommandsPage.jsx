@@ -1,7 +1,7 @@
-import { useEffect } from "react";
-import axios from "axios";
+import { useEffect, useState } from "react";
 import Header from "./Header";
 import { Table } from "antd";
+import { getOperationCommands } from "../Services/APICalls";
 
 const columns = [
   {
@@ -21,7 +21,7 @@ const columns = [
   {title: "الوصف", dataIndex: "description", key: "description"},
   { title: "تاريخ الانتهاء", dataIndex: "endDate", key: "endDate" },
   { title: "تاريخ البدأ", dataIndex: "startDate", key: "startDate" },
-  { title: "الحالة", dataIndex: "state", key: "state" },
+  { title: "الحالة", dataIndex: "place", key: "state" },
   { title: "المكان في المستشفى", dataIndex: "place", key: "place" },
   {title: "الاصول", dataIndex: "devices", key: "devices"},
   { title: "ID (Code)", dataIndex: "id", key: "id" },
@@ -29,106 +29,26 @@ const columns = [
 
 const data = [
   {id: "adad5as4d54a", place: "عمليات", state: "معطل",},
-  { name: "احمد فريد", email: "ahmedfaried@gmail.com", role: "Admin", institutes: "رأس سدر" },
-  { name: "احمد فريد", email: "ahmedfaried@gmail.com", role: "Admin", institutes: "رأس سدر" },
 ];
 
 function OperationCommandsPage() {
-  const url = "https://erpsystem.pildextech.cf/";
+  const [list, setList] = useState();
 
   useEffect(() => {
+    let instituteID = localStorage.getItem("instituteID");
+    console.log(instituteID);
     const fetchData = async () => {
-
+      let temp = await getOperationCommands(instituteID);
+      console.log(temp.data.data);
+      let temp2 = temp.data.data.map((item) => {
+        return {id: item._id, devices: item.modelType, place: item.location, state: item.description, startDate: item.createdAt}
+        // console.log(item);
+      })
+      setList(temp2);
     }
-  })
+    fetchData();
+  }, [])
 
-
-  const list = [
-    {
-      id: "7aad460b",
-      place: "عمليات",
-      condition: "معطل",
-      date: "20/1/2012",
-      description: "يحتاج صيانة",
-    },
-    {
-      id: "9c7ce401",
-      place: "اطفال",
-      condition: "معطل",
-      date: "20/1/2012",
-      description: "يحتاج صيانة",
-    },
-    {
-      id: "8148d57d",
-      place: "جراحة",
-      condition: "معطل",
-      date: "20/1/2012",
-      description: "يحتاج صيانة",
-    },
-    {
-      id: "d7444b86",
-      place: "استقبال",
-      condition: "نصف الكفائة",
-      date: "20/1/2012",
-      description: "يحتاج صيانة",
-    },
-    {
-      id: "bc8d2dc0",
-      place: "عمليات",
-      condition: "ممتاز",
-      date: "20/1/2012",
-      description: "لا يوجد,"
-    },
-    {
-      id: "7aad460b",
-      place: "عمليات",
-      condition: "معطل",
-      date: "20/1/2012",
-      description: "يحتاج صيانة",
-    },
-    {
-      id: "7aad460b",
-      place: "عمليات",
-      condition: "معطل",
-      date: "20/1/2012",
-      description: "يحتاج صيانة",
-    },
-    {
-      id: "9c7ce401",
-      place: "اطفال",
-      condition: "معطل",
-      date: "20/1/2012",
-      description: "يحتاج صيانة",
-    },
-    {
-      id: "8148d57d",
-      place: "جراحة",
-      condition: "معطل",
-      date: "20/1/2012",
-      description: "يحتاج صيانة",
-    },
-    {
-      id: "d7444b86",
-      place: "استقبال",
-      condition: "نصف الكفائة",
-      date: "20/1/2012",
-      description: "يحتاج صيانة",
-    },
-    {
-      id: "bc8d2dc0",
-      place: "عمليات",
-      condition: "ممتاز",
-      date: "20/1/2012",
-      description: "لا يوجد,"
-    },
-    {
-      id: "7aad460b",
-      place: "عمليات",
-      condition: "معطل",
-      date: "20/1/2012",
-      description: "يحتاج صيانة",
-    },
-  ];
 
   return (
     <div className="grow bg-[#F8F9FA]">

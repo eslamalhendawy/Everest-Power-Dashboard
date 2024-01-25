@@ -32,9 +32,13 @@ function Login() {
       return;
     }
     if(result.status == 200) {
-      // console.log(result.data.data.user);
-      appDispatch({type: "login", data: {name :result.data.data.user.name, role: result.data.data.user.role, email: result.data.data.user.email, institutions: result.data.data.user.institutions}});
+      console.log(result);
+      appDispatch({type: "login"});
       localStorage.setItem("userToken", result.data.token);
+      localStorage.setItem("Institutions" , JSON.stringify(result.data.data.user.institutions));
+      localStorage.setItem("email", result.data.data.user.email);
+      localStorage.setItem("name", result.data.data.user.name);
+      localStorage.setItem("role", result.data.data.user.role);
       toast.success("تم تسجيل الدخول بنجاح");
     }
   } 

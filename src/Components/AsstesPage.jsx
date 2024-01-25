@@ -1,92 +1,48 @@
+import { useEffect, useState } from "react";
 import Header from "./Header";
+import { Table } from "antd";
+import { getOperationCommands } from "../Services/APICalls";
+
+const columns = [
+  {
+    title: "الحذف او التعديل",
+    key: "action",
+    render: () => (
+      <div className="flex justify-center gap-2">
+        <button>
+          <i className="fa-solid fa-pen bg-[#0EB70B] text-white p-2 rounded-lg"></i>
+        </button>
+        <button>
+          <i className="fa-solid fa-trash bg-[#CC0F1F] text-white p-2 rounded-lg"></i>
+        </button>
+      </div>
+    ),
+  },
+  {title: "معلومات اضافية", dataIndex: "notes", key: "notes"},
+  {title: "صورة الاصل", dataIndex: "image", key: "image"},
+  {title: "الوصف", dataIndex: "description", key: "description"},
+  { title: "نوع الجهاز", dataIndex: "type", key: "type" },
+  { title: "المكان في المستشفى", dataIndex: "place", key: "place" },
+  { title: "ID (Code)", dataIndex: "id", key: "id" },
+];
+
 
 function OperationCommandsPage() {
-  const list = [
-    {
-      id: "7aad460b",
-      place: "عمليات",
-      condition: "معطل",
-      description: "يحتاج صيانة",
-      type: "اشعة"
-    },
-    {
-      id: "9c7ce401",
-      place: "اطفال",
-      condition: "معطل",
-      description: "نصف الكفائة",
-      type: "تحاليل"
-    },
-    {
-      id: "8148d57d",
-      place: "جراحة",
-      condition: "معطل",
-      description: "يتطلب تغيير",
-      type: "جراحة"
-    },
-    {
-      id: "d7444b86",
-      place: "استقبال",
-      condition: "نصف الكفائة",
-      description: "يحتاج صيانة",
-      type: "تصوير مقطعي"
-    },
-    {
-      id: "7aad460b",
-      place: "عمليات",
-      condition: "معطل",
-      description: "يحتاج صيانة",
-      type: "اشعة"
-    },
-    {
-      id: "9c7ce401",
-      place: "اطفال",
-      condition: "معطل",
-      description: "نصف الكفائة",
-      type: "تحاليل"
-    },
-    {
-      id: "8148d57d",
-      place: "جراحة",
-      condition: "معطل",
-      description: "يتطلب تغيير",
-      type: "جراحة"
-    },
-    {
-      id: "d7444b86",
-      place: "استقبال",
-      condition: "نصف الكفائة",
-      description: "يحتاج صيانة",
-      type: "تصوير مقطعي"
-    },
-    {
-      id: "7aad460b",
-      place: "عمليات",
-      condition: "معطل",
-      description: "يحتاج صيانة",
-      type: "اشعة"
-    },
-    {
-      id: "9c7ce401",
-      place: "اطفال",
-      condition: "معطل",
-      description: "نصف الكفائة",
-      type: "تحاليل"
-    },
-    {
-      id: "8148d57d",
-      place: "جراحة",
-      condition: "معطل",
-      description: "يتطلب تغيير",
-      type: "جراحة"
-    },
-    {
-      id: "d7444b86",
-      place: "استقبال",
-      condition: "نصف الكفائة",
-      description: "يحتاج صيانة",
-      type: "تصوير مقطعي"
-    },
-  ];
+  const [list, setList] = useState();
+
+  useEffect(() => {
+    let instituteID = localStorage.getItem("instituteID");
+    console.log(instituteID);
+    const fetchData = async () => {
+      let temp = await getOperationCommands(instituteID);
+      console.log(temp.data.data);
+      let temp2 = temp.data.data.map((item) => {
+        return {id: item._id, place: item.location, type: item.modelType, description: item.description, notes: item.notes}
+      })
+      setList(temp2);
+    }
+    fetchData();
+  }, [])
 
   return (
     <div className="grow bg-[#F8F9FA]">
@@ -97,31 +53,7 @@ function OperationCommandsPage() {
           <input type="text" className="bg-[#ECECEC] w-full focus:outline-none text-right text-[#3268FF]" placeholder="...البحث هنا" />
         </div>
         <h2 className="text-right text-[#05004E] font-bold text-2xl mb-12">الاصول</h2>
-        <div className="flex flex-row-reverse gap-12 w-full justify-between items-center p-2 border-b border-[#CACACABF]">
-          <p className="font-bold text-sm xl:text-lg text-right basis-1/7">ID (Code)</p>
-          <p className="font-bold text-sm xl:text-lg text-right text-nowrap basis-1/7">المكان في المستشفى</p>
-          <p className="font-bold text-sm xl:text-lg text-right basis-1/7">نوع الجهاز</p>
-          <p className="font-bold text-sm xl:text-lg text-right basis-1/7">وصف</p>
-          <p className="font-bold text-sm xl:text-lg text-right basis-1/7">صورة الاصل</p>
-          <p className="font-bold text-sm xl:text-lg text-right text-nowrap basis-1/7">معلومات اضافية</p>
-          <p className="font-bold text-sm xl:text-lg text-right text-nowrap basis-1/7">الحذف او التعديل</p>
-        </div>
-        {list.map((item, index) => {
-          return (
-            <div key={index} className="flex flex-row-reverse gap-12 w-full justify-between items-center px-2 py-8 border-b border-[#CACACABF]">
-              <p className="text-sm lg:text-base font-semibold text-right basis-1/7">{item.id}</p>
-              <p className="text-sm lg:text-base font-semibold text-right basis-1/7">{item.place}</p>
-              <p className="text-sm lg:text-base font-semibold text-right basis-1/7">{item.type}</p>
-              <p className="text-sm lg:text-base font-semibold text-right basis-1/7">{item.description}</p>
-              <p className="text-sm lg:text-base font-semibold text-right basis-1/7">{item.description}</p>
-              <p className="text-sm lg:text-base font-semibold text-right basis-1/7">{item.description}</p>
-              <div className="flex flex-row-reverse gap-2 xl:gap-6 text-lg items-center text-center basis-1/7">
-                <i className="fa-solid fa-trash p-2 lg:p-3 bg-[#CC0F1F] text-white rounded-lg cursor-pointer"></i>
-                <i className="fa-solid fa-pen p-2 lg:p-3 bg-[#0EB70B] text-white rounded-lg cursor-pointer"></i>
-              </div>
-            </div>
-          );
-        })}
+        <Table columns={columns} dataSource={list} pagination={false} />
       </div>
     </div>
   );
