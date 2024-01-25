@@ -22,7 +22,7 @@ const columns = [
   {title: "صورة الاصل", dataIndex: "image", key: "image"},
   {title: "الوصف", dataIndex: "description", key: "description"},
   { title: "نوع الجهاز", dataIndex: "type", key: "type" },
-  { title: "المكان في المستشفى", dataIndex: "place", key: "place" },
+  { title: "المكان في المنشأة", dataIndex: "place", key: "place" },
   { title: "ID (Code)", dataIndex: "id", key: "id" },
 ];
 
