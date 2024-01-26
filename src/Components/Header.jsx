@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import StateContext from "../StateContext";
 import MobileSideMenu from "./MobileSideMenu";
 
 function Header() {
+  const appState = useContext(StateContext);
   const [select, setSelect] = useState(false);
   const username = localStorage.getItem("name");
   const role = localStorage.getItem("role");

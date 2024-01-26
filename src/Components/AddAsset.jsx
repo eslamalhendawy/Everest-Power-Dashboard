@@ -36,6 +36,14 @@ function AddOperation() {
       return;
     }
     setLoading(true);
+    let temp = await postData("/devices/create", { IDCode: id, location, modelType: type, description, notes: additionalInfo, institutions: instituteID }, token);
+    console.log(temp);
+    if (temp.status === 201) {
+      toast.success("تم اضافة الاصل بنجاح");
+      navigate("/assets");
+    } else {
+      toast.error("حدث خطأ ما");
+    }
   }
 
   return (

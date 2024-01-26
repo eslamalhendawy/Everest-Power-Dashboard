@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getData } from "./Services/APICalls";
 import { useImmerReducer } from "use-immer";
 import { ToastContainer } from "react-toastify";
 import "./App.css";
@@ -19,8 +21,27 @@ import AllUsers from "./Components/AllUsers";
 import AllActivities from "./Components/AllActivities";
 
 function App() {
+  const [user, setUser] = useState(null);
+  const [fetching, setFetching] = useState(true);
+  useEffect(() => {
+    if (localStorage.getItem("userToken")) {
+      const fetchData = async () => {
+       const res = await getData("/users/me", localStorage.getItem("userToken"));
+       setUser(res.data.data.user);
+      }
+      fetchData();
+    } 
+  }, []);
+  console.log(user);
+  
   const initialState = {
     loggedIn: Boolean(localStorage.getItem("userToken")),
+    user: {
+      name: user?.name,
+      email: user?.email,
+      institutions: user?.Institutions,
+      role: user?.role,
+    }
   };
 
   function myReducer(draft, action) {
