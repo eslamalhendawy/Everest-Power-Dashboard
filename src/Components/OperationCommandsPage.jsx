@@ -30,7 +30,7 @@ const columns = [
         key: "devices",
         render: (e) => (
             <div className="w-[100px]">
-              {e.split(" - ").map((item) => (<div>{item}</div>))}
+              {e.split(" - ").map((item ,key) => (<div key={key}>{item}</div>))}
             </div>
         ),
     },

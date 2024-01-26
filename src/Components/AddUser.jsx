@@ -9,7 +9,8 @@ function AddUser() {
   ];
 
   const handleChange = (selectedOptions) => {
-    console.log("Selected Options:", selectedOptions);
+    let values = [];
+    values = selectedOptions.map((option) => option.value);
   };
 
   const options2 = [

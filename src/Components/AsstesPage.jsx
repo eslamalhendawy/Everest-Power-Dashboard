@@ -32,10 +32,8 @@ function OperationCommandsPage() {
 
   useEffect(() => {
     let instituteID = localStorage.getItem("instituteID");
-    console.log(instituteID);
     const fetchData = async () => {
       let temp = await getOperationCommands(instituteID);
-      console.log(temp.data.data);
       let temp2 = temp.data.data.map((item) => {
         return {id: item._id, place: item.location, type: item.modelType, description: item.description, notes: item.notes}
       })

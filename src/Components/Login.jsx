@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import DispatchContext from "../DispatchContext";
 import { postData } from "../Services/APICalls";
+import Logo from "../assets/Logo.png";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -47,12 +48,13 @@ function Login() {
   return (
     <div className="h-screen bg-[#F8F8F8] flex justify-center items-center px-3">
       <div className="bg-[#FFFFFF9C] px-6 py-12 border border-[#00000033] text-right w-[400px] rounded-lg">
+        <img className="w-[250px] mx-auto" src={Logo} alt="" />
         <p className="font-bold text-black text-3xl mb-12">
-          <span>! </span>مرحبا بعودتك
+          {/* <span>! </span>مرحبا بعودتك */}
         </p>
         <div className="mb-6">
           <p className="mb-3 font-bold text-lg">: الايميل</p>
-          <input onChange={(e) => setEmail(e.target.value)} className="border border-[#000000] focus:outline-none text-right px-3 py-2 rounded-lg block w-full" type="text" />
+          <input onChange={(e) => setEmail(e.target.value)} className="border border-[#000000] focus:outline-none text-right px-3 py-2 rounded-lg block w-full" type="email" />
         </div>
         <div className="mb-6">
           <p className="mb-3 font-bold text-lg">: كلمة المرور</p>
@@ -63,10 +65,10 @@ function Login() {
             <p className="font-bold text-lg">: تذكرني</p>
             <input type="checkbox" />
           </div>
-          <p className="font-bold text-lg text-[#4288F1]">نسيت كلمة المرور ؟</p>
+          {/* <p className="font-bold text-lg text-[#4288F1]">نسيت كلمة المرور ؟</p> */}
         </div>
-        <div className="flex justify-center">
-          <button onClick={login} to="" className="px-12 py-2 bg-[#2B80FF] text-[#FFFFFF9C] text-lg font-bold rounded-lg hover:bg-[#1C48C2] duration-300">دخول</button>
+        <div className="flex justify-center mt-[50px]">
+          <button onClick={login} to="" className="px-12 py-2 bg-[#2B80FF] text-[#ffffff] text-lg font-bold rounded-lg hover:bg-[#1C48C2] duration-300">دخول</button>
         </div>
       </div>
     </div>

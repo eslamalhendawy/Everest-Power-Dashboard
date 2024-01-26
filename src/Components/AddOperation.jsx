@@ -1,74 +1,99 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./Header";
-import { Link } from "react-router-dom";
-import { addOperation } from "../Services/APICalls";
+import { Link, useNavigate } from "react-router-dom";
+import { addOperation, getData } from "../Services/APICalls";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Select from "react-select";
+const customStyles = {
+  control: (provided, state) => ({
+    ...provided,
+    border: "1px solid black",
+    borderRadius: "8px",
+    padding: "6px",
+    boxShadow: state.isFocused ? "0 0 0 2px #2868c7" : null,
+    outline: "none",
+    textAlign: "right",
+  }),
+  option: (provided, state) => ({
+    ...provided,
+    backgroundColor: state.isSelected ? "#2868c7" : null,
+    color: state.isSelected ? "#fff" : null,
+    textAlign: "right",
+  }),
+};
+const stats = [
+  { value: "pending", label: "Pending" },
+  { value: "inprogress", label: "Inprogress" },
+  { value: "completed", label: "Completed" },
+  { value: "cancelled", label: "Cancelled" },
+];
 
 function AddOperation() {
+  const navigate = useNavigate();
   const token = localStorage.getItem("userToken");
   const [IDCode, setIDCode] = useState("");
   const [location, setLocation] = useState("");
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState("");
   const [startedAt, setStartedAt] = useState("");
+  const [finishedAt, setFinishedAt] = useState("");
   const institutions = localStorage.getItem("instituteID");
-  const [devices, setDevices] = useState("");
+  const [devices, setDevices] = useState(null);
+  const [devicesOptions, setDevicesOptions] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  const options = [
-    { value: "option1", label: "المؤسسة 1" },
-    { value: "option2", label: "المؤسسة 2" },
-    { value: "option3", label: "المؤسسة 3" },
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await getData(`/devices/institution/${institutions}`, token);
+      res.data.data = res.data.data.map((item) => {
+        return { ...item, label: item.IDCode, value: item._id };
+      });
+      setDevicesOptions(res.data.data);
+    };
 
-  const handleChange = (selectedOptions) => {
-    console.log("Selected Options:", selectedOptions);
-  };
-
-  const customStyles = {
-    control: (provided, state) => ({
-      ...provided,
-      border: "1px solid black",
-      borderRadius: "8px",
-      padding: "6px",
-      boxShadow: state.isFocused ? "0 0 0 2px #2868c7" : null,
-      outline: "none",
-    }),
-    option: (provided, state) => ({
-      ...provided,
-      backgroundColor: state.isSelected ? "#2868c7" : null,
-      color: state.isSelected ? "#fff" : null,
-    }),
-  };
+    fetchData();
+  }, []);
 
   const sendData = async () => {
-    if(IDCode === ""){
+    if (IDCode === "") {
       toast.error("ادخل رمز امر التشغيل");
       return;
     }
-    if(location === ""){
+    if (location === "") {
       toast.error("ادخل المكان في المنشأة");
       return;
     }
-    if(startedAt === ""){
+    if (startedAt === "") {
       toast.error("ادخل تاريخ البدأ");
       return;
     }
-    if(devices === ""){
+    if (devices === null) {
       toast.error("ادخل الاصل");
       return;
     }
-    if(status === "") {
+    if (status === "") {
       toast.error("ادخل حالة الامر");
       return;
     }
-    if(description === ""){
+    if (description === "") {
       toast.error("ادخل الوصف");
       return;
     }
-    await addOperation(token, {institutions, description, status, devices, location, startedAt, IDCode})
-  }
+    setLoading(true);
+    toast.info("جاري اضافة الامر");
+    let temp = await addOperation(token, { institutions, description, status, devices, location, startedAt, IDCode, finishedAt });
+    console.log(temp);
+    if (temp.status === 201) {
+      toast.success("تم اضافة الامر بنجاح");
+      navigate("/operations");
+      setLoading(false);
+    } else {
+      toast.error("حدث خطأ ما");
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="grow bg-[#F8F9FA]">
@@ -95,17 +120,32 @@ function AddOperation() {
           </div>
           <div className="basis-1/2">
             <p className="text-right text-lg font-semibold mb-4">تاريخ الانتهاء</p>
-            <input className="focus:outline-none border w-full border-black p-3 rounded-lg text-right" type="date" />
+            <input onChange={(e) => setFinishedAt(e.target.value)} className="focus:outline-none border w-full border-black p-3 rounded-lg text-right" type="date" />
           </div>
         </div>
         <div className="flex flex-col gap-6 md:flex-row-reverse mb-6">
           <div className="basis-1/2">
             <p className="text-right text-lg font-semibold mb-4">الاصل</p>
-            <input onChange={(e) => setDevices(e.target.value)} className="focus:outline-none border w-full border-black p-3 rounded-lg text-right" type="text" />
+            <Select
+              styles={customStyles}
+              options={devicesOptions}
+              onChange={(e) => {
+                setDevices(e.map((item) => item._id));
+              }}
+              isMulti
+              placeholder="Select multiple options"
+            />
           </div>
           <div className="basis-1/2">
             <p className="text-right text-lg font-semibold mb-4">الحالة</p>
-            <input onChange={(e) => setStatus(e.target.value)} className="focus:outline-none border w-full border-black p-3 rounded-lg text-right" type="text" />
+            <Select
+              styles={customStyles}
+              options={stats}
+              onChange={(e) => {
+                setStatus(e.value);
+              }}
+              placeholder="Select multiple options"
+            />
           </div>
         </div>
         <div className="flex flex-col gap-6 md:items-center md:flex-row-reverse mb-6">
@@ -113,14 +153,14 @@ function AddOperation() {
             <p className="text-right text-lg font-semibold mb-4">الوصف</p>
             <textarea onChange={(e) => setDescription(e.target.value)} className="focus:outline-none border w-[98%] h-full block ml-auto border-black p-3 rounded-lg text-right" name="" id=""></textarea>
           </div>
-          {/* <div className="basis-1/2">
-            <p className="text-right text-lg font-semibold mb-4">المؤسسة</p>
-            <Select styles={customStyles} options={options} onChange={handleChange} placeholder="Select multiple options" />
-          </div> */}
         </div>
         <div className="flex flex-row-reverse gap-12 mb-6">
-          <button onClick={sendData} className="border-[2px] text-white hover:text-white bg-[#2B80FF] hover:bg-[#1C48C2]  duration-300 border-[#2B80FF] hover:border-[#1C48C2] py-2 px-12 group rounded-lg">اضافة</button>
-          <Link to="/operations" className="border-[2px] text-[#FF5656] hover:text-white hover:bg-[#FF5656] duration-300 border-[#FF5656] py-2 px-12 group rounded-lg">الغاء</Link>
+          <button onClick={sendData} disabled={loading} className={loading ? "border-[2px] text-[#cbcfd7] border-[#f0f1f4] py-2 px-12 group rounded-lg" : "border-[2px] text-white hover:text-white bg-[#2B80FF] hover:bg-[#1C48C2]  duration-300 border-[#2B80FF] hover:border-[#1C48C2] py-2 px-12 group rounded-lg"}>
+            اضافة
+          </button>
+          <Link to={loading ? "#" : "/operations"} onClick={(e) => loading && e.preventDefault()} disabled={loading} className={loading ? "border-[2px]  text-[#cbcfd7] border-[#f0f1f4] py-2 px-12 group rounded-lg" : "border-[2px] text-[#FF5656] hover:text-white hover:bg-[#FF5656] duration-300 border-[#FF5656] py-2 px-12 group rounded-lg"}>
+            الغاء
+          </Link>
         </div>
       </div>
     </div>
