@@ -19,52 +19,28 @@ import AddUser from "./Components/AddUser";
 import AddPlan from "./Components/AddPlan";
 import AllUsers from "./Components/AllUsers";
 import AllActivities from "./Components/AllActivities";
+import { useStoreContext } from "./Context/storeContext";
 
 function App() {
-  const [user, setUser] = useState(null);
-  const [fetching, setFetching] = useState(true);
+  const loggedIn = Boolean(localStorage.getItem("userToken"));
+  const { userData, setUserData } = useStoreContext();
+  const [isData, setIsData] = useState(true);
   useEffect(() => {
-    if (localStorage.getItem("userToken")) {
-      const fetchData = async () => {
-       const res = await getData("/users/me", localStorage.getItem("userToken"));
-       setUser(res.data.data.user);
-      }
-      fetchData();
-    } 
+    if (loggedIn) {
+      getData("/users/me", localStorage.getItem("userToken")).then((res) => {
+        setUserData(res.data.data.user);
+        setIsData(false);
+      });
+    }
   }, []);
-  console.log(user);
-  
-  const initialState = {
-    loggedIn: Boolean(localStorage.getItem("userToken")),
-    user: {
-      name: user?.name,
-      email: user?.email,
-      institutions: user?.Institutions,
-      role: user?.role,
-    }
-  };
-
-  function myReducer(draft, action) {
-    switch (action.type) {
-      case "login":
-        draft.loggedIn = true;
-        break;
-      case "logout":
-        draft.loggedIn = false;
-        break;
-    }
-  }
-
-  const [state, dispatch] = useImmerReducer(myReducer, initialState);
-
   return (
-    <StateContext.Provider value={state}>
-      <DispatchContext.Provider value={dispatch}>
-        <div className={state.loggedIn ? "flex flex-row-reverse h-screen overflow-scroll 2xl:overflow-x-hidden md:overflow-y-auto" : ""}>
-          <Router>
-            {state.loggedIn ? <SideMenu /> : ""}
-            <Routes>
-              <Route path="/" exact element={state.loggedIn ? <MainPage /> : <Login />} />
+    <div className={loggedIn ? "flex flex-row-reverse h-screen overflow-scroll 2xl:overflow-x-hidden md:overflow-y-auto" : ""}>
+      <Router>
+        {loggedIn ? <SideMenu /> : ""}
+        <Routes>
+          <Route path="/" exact element={loggedIn && !isData ? <MainPage /> : !loggedIn && isData ? <Login /> : <></>} />
+          {!isData && (
+            <>
               <Route path="/operations" exact element={<OperationCommandsPage />} />
               <Route path="/add-operation" exact element={<AddOperation />} />
               <Route path="/assets" exact element={<AsstetsPage />} />
@@ -74,12 +50,12 @@ function App() {
               <Route path="/add-plan" exact element={<AddPlan />} />
               <Route path="/users" exact element={<AllUsers />} />
               <Route path="/all-activities" exact element={<AllActivities />} />
-            </Routes>
-            <ToastContainer autoClose={2500} theme="dark" newestOnTop={true} />
-          </Router>
-        </div>
-      </DispatchContext.Provider>
-    </StateContext.Provider>
+            </>
+          )}
+        </Routes>
+        <ToastContainer autoClose={2500} theme="dark" newestOnTop={true} />
+      </Router>
+    </div>
   );
 }
 

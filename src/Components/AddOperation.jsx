@@ -6,6 +6,7 @@ import { addOperation, getData } from "../Services/APICalls";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Select from "react-select";
+import { useStoreContext } from "../Context/storeContext";
 const customStyles = {
   control: (provided, state) => ({
     ...provided,
@@ -39,18 +40,19 @@ function AddOperation() {
   const [status, setStatus] = useState("");
   const [startedAt, setStartedAt] = useState("");
   const [finishedAt, setFinishedAt] = useState("");
-  const institutions = localStorage.getItem("instituteID");
   const [devices, setDevices] = useState(null);
   const [devicesOptions, setDevicesOptions] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  const {userData} =useStoreContext()
+
   useEffect(() => {
     const fetchData = async () => {
-      const res = await getData(`/devices/institution/${institutions}`, token);
-      res.data.data = res.data.data.map((item) => {
+      const res = await getData(`/devices/institution/${userData.currentInstitutions._id}`, token);
+      res.data.data.devices = res.data.data.devices.map((item) => {
         return { ...item, label: item.IDCode, value: item._id };
       });
-      setDevicesOptions(res.data.data);
+      setDevicesOptions(res.data.data.devices);
     };
 
     fetchData();

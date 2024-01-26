@@ -5,6 +5,7 @@ import { postData } from "../Services/APICalls";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useStoreContext } from "../Context/storeContext";
 
 function AddOperation() {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ function AddOperation() {
   const [additionalInfo, setAdditionalInfo] = useState("");
   const [image, setImage] = useState("");
   const token = localStorage.getItem("userToken");
-  const instituteID = localStorage.getItem("instituteID");
+  const {userData} =useStoreContext()
   const [loading, setLoading] = useState(false);
 
   const sendData = async () => {
@@ -36,7 +37,7 @@ function AddOperation() {
       return;
     }
     setLoading(true);
-    let temp = await postData("/devices/create", { IDCode: id, location, modelType: type, description, notes: additionalInfo, institutions: instituteID }, token);
+    let temp = await postData("/devices/create", { IDCode: id, location, modelType: type, description, notes: additionalInfo, institutions: userData.currentInstitutions._id }, token);
     console.log(temp);
     if (temp.status === 201) {
       toast.success("تم اضافة الاصل بنجاح");
