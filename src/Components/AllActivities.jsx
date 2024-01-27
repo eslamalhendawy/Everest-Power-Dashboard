@@ -1,20 +1,38 @@
+import { useEffect, useState } from "react";
 import Header from "./Header";
-import { Table } from "antd";
+import { Pagination,Table } from "antd";
+import { getData } from "../Services/APICalls";
+import { useStoreContext } from "../Context/storeContext";
+import { useTranslation } from "react-i18next";
 
-const columns = [
-  { title: "وقت العملية", dataIndex: "time", key: "time" },
-  {title: "نوع العملية", dataIndex: "type", key: "type"},
-  { title: "مكان العملية", dataIndex: "place", key: "place" },
-  { title: "الصلاحية", dataIndex: "role", key: "role" },
-  { title: "الاسم", dataIndex: "name", key: "name" },
-];
-
-const data = [
-  { name: "احمد فريد", place: "اصول", role: "Admin", type: "اضافة اصل", time: "24/1/2024"},
-  { name: "احمد فريد", place: "اصول", role: "Admin", type: "اضافة اصل", time: "24/1/2024"},
-];
 
 function AllActivities() {
+  const { userData } = useStoreContext();
+  const { t } = useTranslation();
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(2);
+  const [limit, setLimit] = useState(10);
+
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    getData(`/history/${userData.currentInstitutions._id}?page=${page}&limit=${limit}`).then((res) => {
+      console.log(res.data.histories);
+      let temp2 = res.data.histories.map((item) => {
+        const date = new Date(item.createdAt);
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+        const year = date.getFullYear();
+        return {
+          name: item.user.name,
+          role: item.user.role,
+          place: item.category === "Device" ? "اصل" : "امر تشغيل",
+          type: item.status === "Created" ? "اضافه" : item.status === "Deleted" ? "حذف" : "تعديل",
+          time: `${day}-${month}-${year}`,
+        };
+      });
+      setData(temp2.reverse());
+    });
+  }, [page, limit]);
 
   return (
     <div className="grow bg-[#F8F9FA]">
@@ -22,12 +40,21 @@ function AllActivities() {
       <div className="bg-white m-6 p-6 rounded-lg">
         <div className="flex flex-row-reverse gap-2 items-center mb-6 pb-6 border-b-2">
           <i className="fa-solid fa-box text-2xl text-[#05004E]"></i>
-          <h2 className="text-right text-[#05004E] font-bold text-2xl ">جدول الانشطة</h2>
+          <h2 className="text-right text-[#05004E] font-bold text-2xl">{t("activities")}</h2>
         </div>
-        <Table columns={columns} dataSource={data} pagination={false} />
+        <Table dataSource={data} pagination={false}>
+          <Table.Column title={t("operation_date")} dataIndex="time" key="time" />
+          <Table.Column title={t("operation_type")} dataIndex="type" key="type" />
+          <Table.Column title={t("operation_place")} dataIndex="place" key="place" />
+          <Table.Column title={t("permissions")} dataIndex="role" key="role" />
+          <Table.Column title={t("name")} dataIndex="name" key="name" />
+        </Table>
+        <div className="flex justify-center mt-12">
+          <Pagination defaultCurrent={1} showSizeChanger onShowSizeChange={(e, value) => setLimit(value)} total={pageSize} onChange={(e) => setPage(e)} />
+        </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default AllActivities
+export default AllActivities;

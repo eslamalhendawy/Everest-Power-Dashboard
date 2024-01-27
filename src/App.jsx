@@ -4,9 +4,8 @@ import { getData } from "./Services/APICalls";
 import { useImmerReducer } from "use-immer";
 import { ToastContainer } from "react-toastify";
 import "./App.css";
+import logo from "./Assets/logo.png";
 
-import StateContext from "./StateContext";
-import DispatchContext from "./DispatchContext";
 import Login from "./Components/Login";
 import SideMenu from "./Components/SideMenu";
 import MainPage from "./Components/MainPage";
@@ -21,10 +20,24 @@ import AllUsers from "./Components/AllUsers";
 import AllActivities from "./Components/AllActivities";
 import { useStoreContext } from "./Context/storeContext";
 
+import i18n from "i18next"
+import { initReactI18next } from "react-i18next"
+import enTranslations from "./lang/en.json"
+import arTranslations from "./lang/ar.json"
+
 function App() {
   const loggedIn = Boolean(localStorage.getItem("userToken"));
   const { userData, setUserData } = useStoreContext();
   const [isData, setIsData] = useState(true);
+  const Language = localStorage.getItem("lang");
+  i18n.use(initReactI18next).init({
+    resources: {
+      en: { translation: enTranslations },
+      ar: { translation: arTranslations },
+    },
+    lng: Language === "ar"||Language===null ? "ar" : "en",
+    fallbackLng: "ar",
+  })
   useEffect(() => {
     if (loggedIn) {
       getData("/users/me", localStorage.getItem("userToken")).then((res) => {
@@ -36,9 +49,11 @@ function App() {
   return (
     <div className={loggedIn ? "flex flex-row-reverse h-screen overflow-scroll 2xl:overflow-x-hidden md:overflow-y-auto" : ""}>
       <Router>
-        {loggedIn ? <SideMenu /> : ""}
+        {loggedIn && !isData  ? <SideMenu /> : ""}
         <Routes>
-          <Route path="/" exact element={loggedIn && !isData ? <MainPage /> : !loggedIn && isData ? <Login /> : <></>} />
+          <Route path="/" exact element={loggedIn && !isData ? <MainPage /> : !loggedIn && isData ? <Login /> : <div className="absolute w-screen h-screen flex justify-center items-center opacity-pulse">
+            <img className="max-w-md" src={logo} alt="" />
+          </div>} />
           {!isData && (
             <>
               <Route path="/operations" exact element={<OperationCommandsPage />} />
