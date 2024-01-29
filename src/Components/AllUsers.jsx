@@ -104,6 +104,7 @@ function AllUsers() {
       toast.error("اختر المؤسسة");
       return;
     }
+    setLoading(true);
     let temp = await updateData(`/users//edit-user/${userID}`, { name, role,  institutions, email}, token);
     console.log(temp);
     if(temp.status === 200){
@@ -111,6 +112,7 @@ function AllUsers() {
       location.reload();
     }else{
       toast.error("حدث خطأ ما");
+      setLoading(false);
     }
   };
 
