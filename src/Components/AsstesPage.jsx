@@ -86,7 +86,7 @@ function OperationCommandsPage() {
 
   const sendData = async () => {
     
-    if (year === undefined || month === undefined || checked === false) {
+    if (year === undefined || month === undefined) {
       toast.error("يجب ادخال جميع البيانات");
       return;
     }
@@ -102,6 +102,9 @@ function OperationCommandsPage() {
       toast.success("تم اضافة الصيانة بنجاح");
       handleClose();
       setLoading(false);
+      setDeviceID();
+      setChecked(null);
+      date = "";
     }else{
       toast.error("حدث خطأ ما");
       setLoading(false);
