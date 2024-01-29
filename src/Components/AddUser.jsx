@@ -40,7 +40,6 @@ function AddUser() {
   const handleChange = (selectedOptions) => {
     let values = [];
     values = selectedOptions.map((option) => option.value);
-    console.log(values);
     setInstitutions(values);
   };
 
