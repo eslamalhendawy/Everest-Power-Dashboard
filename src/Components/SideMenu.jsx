@@ -143,7 +143,7 @@ function SideMenu() {
               setSelected("plans");
               setOpen0(4);
             }}
-            to="/add-plan"
+            to="/plan"
           >
             <li className={`flex p-3 cursor-pointer rounded-lg flex-row-reverse justify-between items-center gap-2 text-[#737791] hover:bg-gradient-to-l from-[#4D7DFF] to-[#1C48C2] hover:text-white duration-300 ${selected == "plans" ? "bg-gradient-to-l from-[#4D7DFF] to-[#1C48C2] text-white" : ""}`}>
               <div className="flex flex-row-reverse gap-2 items-center">
