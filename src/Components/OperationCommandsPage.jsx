@@ -12,6 +12,7 @@ import { DatePicker } from "antd";
 import dayjs from "dayjs";
 import { toast } from "react-toastify";
 import Modal from "@mui/material/Modal";
+import Select from "react-select";
 
 export const HtmlTooltip = styled(({ className, ...props }) => <Tooltip {...props} classes={{ popper: className }} />)(({ theme }) => ({
   [`& .${tooltipClasses.tooltip}`]: {
@@ -22,6 +23,31 @@ export const HtmlTooltip = styled(({ className, ...props }) => <Tooltip {...prop
     border: "1px solid #dadde9",
   },
 }));
+
+const stats = [
+  { value: "pending", label: "Pending" },
+  { value: "inprogress", label: "Inprogress" },
+  { value: "completed", label: "Completed" },
+  { value: "cancelled", label: "Cancelled" },
+];
+
+const customStyles = {
+  control: (provided, state) => ({
+    ...provided,
+    border: "1px solid black",
+    borderRadius: "8px",
+    padding: "6px",
+    boxShadow: state.isFocused ? "0 0 0 2px #2868c7" : null,
+    outline: "none",
+    textAlign: "right",
+  }),
+  option: (provided, state) => ({
+    ...provided,
+    backgroundColor: state.isSelected ? "#2868c7" : null,
+    color: state.isSelected ? "#fff" : null,
+    textAlign: "right",
+  }),
+};
 
 function OperationCommandsPage() {
   const { t } = useTranslation();
@@ -36,11 +62,19 @@ function OperationCommandsPage() {
   const [monthName, setMonthName] = useState(date.toLocaleString("default", { month: "long" }));
 
   const [operationID, setOperationID] = useState("");
+  const [IDCode, setIDCode] = useState("");
+  const [location, setLocation] = useState("");
+  const [description, setDescription] = useState("");
+  const [status, setStatus] = useState("");
+  const [startedAt, setStartedAt] = useState("");
+  const [finishedAt, setFinishedAt] = useState("");
+  const [devices, setDevices] = useState(null);
 
   const [open, setOpen] = useState(false);
   const [open2, setOpen2] = useState(false);
   const handleClose = () => setOpen(false);
   const handleClose2 = () => setOpen2(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -101,9 +135,28 @@ function OperationCommandsPage() {
   };
 
   const deleteOperation = async () => {
+    setLoading(true);
     let temp = await deleteData(`/orders/${operationID}`, localStorage.getItem("userToken"));
     console.log(temp);
-  }
+    if (temp.status === 204) {
+      toast.success("Deleted Successfully");
+      setOpen2(false);
+      window.location.reload();
+    } else {
+      toast.error("Something went wrong");
+      setLoading(false);
+    }
+  };
+
+  const editHandler = (record) => {
+    console.log(record);
+    setOpen(true);
+    setIDCode(record.id);
+    setLocation(record.place);
+    setDescription(record.description);
+    setStartedAt(record.startDate);
+    setFinishedAt(record.endDate);
+  };
 
   return (
     <div className="grow bg-[#F8F9FA]">
@@ -146,7 +199,7 @@ function OperationCommandsPage() {
             key="action"
             render={(_, record) => (
               <div className="flex justify-center gap-2">
-                <button onClick={() => setOpen(true)}>
+                <button onClick={() => editHandler(record)}>
                   <i className="fa-solid fa-pen bg-[#0EB70B] text-white p-2 rounded-lg"></i>
                 </button>
                 <button onClick={() => deleteHandler(record)}>
@@ -167,7 +220,57 @@ function OperationCommandsPage() {
           <Pagination defaultCurrent={1} showSizeChanger onShowSizeChange={(e, value) => setLimit(value)} total={pageSize} onChange={(e) => setPage(e)} />
         </div>
         <Modal open={open} onClose={handleClose}>
-          <p>modal1</p>
+          <div className="w-screen h-screen flex justify-center items-center">
+            <div className="p-4 bg-white rounded min-w-[250px] lg:min-w-[450px]">
+              <div className="flex justify-end mb-2">
+                <i className="fa-solid fa-xmark text-2xl text-[#FF5656] cursor-pointer" onClick={() => handleClose()}></i>
+              </div>
+              <h3 className="text-center text-2xl mb-3">{t("edit_operation")}</h3>
+              <div className="mb-3">
+                <p className="text-right mb-2">ID (Code)</p>
+                <input value={IDCode} onChange={(e) => setIDCode(e.target.value)} className="focus:outline-none border w-full border-black p-2 rounded-lg text-right" type="text" />
+              </div>
+              <div className="mb-3">
+                <p className="text-right mb-2">{t("devices")}</p>
+                <Select
+                  styles={customStyles}
+                  options={stats}
+                  onChange={(e) => {
+                    setStatus(e.value);
+                  }}
+                />
+              </div>
+              <div className="mb-3">
+                <p className="text-right mb-2">{t("description")}</p>
+                <input value={description} onChange={(e) => setDescription(e.target.value)} className="focus:outline-none border w-full border-black p-2 rounded-lg text-right" type="text" />
+              </div>
+              <div className="mb-3">
+                <p className="text-right mb-2">{t("location")}</p>
+                <input value={location} onChange={(e) => setLocation(e.target.value)} className="focus:outline-none border w-full border-black p-2 rounded-lg text-right" type="text" />
+              </div>
+              <div className="mb-3">
+                <p className="text-right mb-2">{t("status")}</p>
+                <Select
+                  styles={customStyles}
+                  options={stats}
+                  onChange={(e) => {
+                    setStatus(e.value);
+                  }}
+                />
+              </div>
+              <div className="mb-3">
+                <p className="text-right mb-2">{t("start_date")}</p>
+                <input value={startedAt} onChange={(e) => setStartedAt(e.target.value)} className="focus:outline-none border w-full border-black p-2 rounded-lg text-right" type="date" />
+              </div>
+              <div className="mb-3">
+                <p className="text-right mb-2">{t("end_date")}</p>
+                <input value={finishedAt} onChange={(e) => setFinishedAt(e.target.value)} className="focus:outline-none border w-full border-black p-2 rounded-lg text-right" type="date" />
+              </div>
+              <div className="flex justify-center">
+                <button className={loading ? "border-[2px] text-[#cbcfd7] border-[#f0f1f4] py-2 px-12 group rounded-lg" : "border-[2px] text-white hover:text-white bg-[#2B80FF] hover:bg-[#1C48C2]  duration-300 border-[#2B80FF] hover:border-[#1C48C2] py-2 px-12 group rounded-lg"}>{t("edit_operation")}</button>
+              </div>
+            </div>
+          </div>
         </Modal>
         <Modal open={open2} onClose={handleClose2}>
           <div className="w-screen h-screen flex justify-center items-center">
