@@ -45,7 +45,7 @@ function AddUser() {
 
   const options2 = [
     { value: "manager", label: "Manager" },
-    { value: "engeineer", label: "Engeineer" },
+    { value: "engineer", label: "Engineer" },
     { value: "user", label: "User" },
   ];
 
@@ -88,6 +88,10 @@ function AddUser() {
     }
     if (password === "") {
       toast.error("ادخل كلمة المرور");
+      return;
+    }
+    if(password.length < 8){
+      toast.error("كلمة المرور يجب ان تكون من 8 احرف او اكثر");
       return;
     }
     if (confirmPass === "") {

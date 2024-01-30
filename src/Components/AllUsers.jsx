@@ -110,13 +110,11 @@ function AllUsers() {
   };
 
   const deleteUser = (record) => {
-    console.log(record);
     setOpen2(true);
     setUserID(record.id);
   };
 
   const handleDelete = async () => {
-    console.log(userID);
     let temp = await deleteData(`/users/delete-account/${userID}`, token);
     if (temp.status === 200) {
       handleClose2();

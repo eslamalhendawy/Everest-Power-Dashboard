@@ -79,7 +79,6 @@ function OperationCommandsPage() {
 
   const handleClick = (e) => {
     setOpen(true);
-    console.log(e);
     setDeviceName(e.IDCode);
     setDeviceID(e.id);
   };
@@ -108,7 +107,6 @@ function OperationCommandsPage() {
     setLoading(true);
     let date = year + "-" + month + "-" + value;
     let temp = await postData(`/maintenance/${userData.currentInstitutions._id}`, { deviceID, date, checked }, token);
-    console.log(temp);
     if (temp.status === 201) {
       toast.success("تم اضافة الصيانة بنجاح");
       handleClose();
@@ -123,7 +121,6 @@ function OperationCommandsPage() {
   };
 
   const handleEdit = (e) => {
-    console.log(e);
     setOpen2(true);
     setDeviceID(e.id);
     setIDCode(e.IDCode);

@@ -66,11 +66,6 @@ function SideMenu() {
                   <p className="text-xs lg:text-base">{t("add_operation")}</p>
                 </li>
               </Link>
-
-              <li className="flex flex-row-reverse items-center p-3 gap-2 text-[#737791] cursor-pointer hover:text-[#000000] duration-300">
-                <i className="fa-solid fa-plus"></i>
-                <p className="text-xs lg:text-base">{t("history_operation")}</p>
-              </li>
             </ul>
           </Collapse>
           <Link
@@ -150,33 +145,10 @@ function SideMenu() {
                 <i className="fa-solid fa-person-digging"></i>
                 <p className="text-right hidden lg:block">{t("work_plans")}</p>
               </div>
-              {open == 4 ? <ExpandLess /> : <ExpandMore />}
+              {/* {open == 4 ? <ExpandLess /> : <ExpandMore />} */}
             </li>
           </Link>
-          <Collapse in={open == 4} timeout="auto" unmountOnExit>
-            <ul className="bg-[#EAEEF899] rounded-lg text-right">
-              <li className="flex flex-row-reverse items-center p-3 gap-2 text-[#737791] cursor-pointer hover:text-[#000000] duration-300">
-                <i className="fa-solid fa-plus"></i>
-                <p className="text-xs lg:text-base">اضافة خطة عمل</p>
-              </li>
-              <li className="flex flex-row-reverse items-center p-3 gap-2 text-[#737791] cursor-pointer hover:text-[#000000] duration-300">
-                <i className="fa-solid fa-plus"></i>
-                <p className="text-xs lg:text-base">اضافة خطة اليوم</p>
-              </li>
-              <li className="flex flex-row-reverse items-center p-3 gap-2 text-[#737791] cursor-pointer hover:text-[#000000] duration-300">
-                <i className="fa-solid fa-plus"></i>
-                <p className="text-xs lg:text-base">خطط خلال اليوم</p>
-              </li>
-              <li className="flex flex-row-reverse items-center p-3 gap-2 text-[#737791] cursor-pointer hover:text-[#000000] duration-300">
-                <i className="fa-solid fa-plus"></i>
-                <p className="text-xs lg:text-base">خطط خلال الشهر</p>
-              </li>
-              <li className="flex flex-row-reverse items-center p-3 gap-2 text-[#737791] cursor-pointer hover:text-[#000000] duration-300">
-                <i className="fa-solid fa-plus"></i>
-                <p className="text-xs lg:text-base">جميع السجلات</p>
-              </li>
-            </ul>
-          </Collapse>
+
           <Link
             onClick={() => {
               setSelected("users");
