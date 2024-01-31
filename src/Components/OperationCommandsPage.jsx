@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import Header from "./Header";
 import { Pagination, Table } from "antd";
-import { getData, deleteData } from "../Services/APICalls";
+import { getData, deleteData, updateData } from "../Services/APICalls";
 import { useState } from "react";
 import { useStoreContext } from "../Context/storeContext";
 import { styled } from "@mui/material";
@@ -13,6 +13,8 @@ import dayjs from "dayjs";
 import { toast } from "react-toastify";
 import Modal from "@mui/material/Modal";
 import Select from "react-select";
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 
 export const HtmlTooltip = styled(({ className, ...props }) => <Tooltip {...props} classes={{ popper: className }} />)(({ theme }) => ({
   [`& .${tooltipClasses.tooltip}`]: {
@@ -60,7 +62,8 @@ function OperationCommandsPage() {
   const monthFormat = "YYYY/MM";
   const [date, setDate] = useState(new Date());
   const [monthName, setMonthName] = useState(date.toLocaleString("default", { month: "long" }));
-
+  const token = localStorage.getItem("userToken");
+  const [devicesOptions, setDevicesOptions] = useState([]);
   const [operationID, setOperationID] = useState("");
   const [IDCode, setIDCode] = useState("");
   const [location, setLocation] = useState("");
@@ -78,7 +81,20 @@ function OperationCommandsPage() {
 
   useEffect(() => {
     const fetchData = async () => {
+      const res = await getData(`/devices/institution/${userData.currentInstitutions._id}`, token);
+      res.data.data.devices = res.data.data.devices.map((item) => {
+        return { ...item, label: item.IDCode, value: item._id };
+      });
+      setDevicesOptions(res.data.data.devices);
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
       let temp = await getData(`/orders/institution/${userData.currentInstitutions._id}?page=${page}&limit=${limit}`, localStorage.getItem("userToken"));
+      console.log(temp);
       setPageSize(temp.data.data.pages * 10);
       let temp2 = temp.data.data.orders.map((item) => {
         const date = new Date(item.startedAt);
@@ -98,7 +114,7 @@ function OperationCommandsPage() {
           state: item.status,
           description: item.description,
           endDate: item.finishedAt,
-          devices: item.devices.map((item) => item.IDCode).join(" - "),
+          devices: item.devices ? item.devices.map((item) => item.IDCode).join(" - ") : "لا يوجد",
           startDate: `${day}-${month}-${year}`,
         };
       });
@@ -151,11 +167,53 @@ function OperationCommandsPage() {
   const editHandler = (record) => {
     console.log(record);
     setOpen(true);
+    setOperationID(record.operationID);
     setIDCode(record.id);
     setLocation(record.place);
     setDescription(record.description);
-    setStartedAt(record.startDate);
-    setFinishedAt(record.endDate);
+  };
+
+  const editOperation = async () => {
+    console.log(IDCode);
+    console.log(location);
+    console.log(description);
+    console.log(status);
+    console.log(startedAt);
+    console.log(finishedAt);
+    console.log(devices);
+    if (IDCode === "") {
+      toast.error("ادخل رمز امر التشغيل");
+      return;
+    }
+    if (location === "") {
+      toast.error("ادخل المكان في المنشأة");
+      return;
+    }
+    if (startedAt === "") {
+      toast.error("ادخل تاريخ البدأ");
+      return;
+    }
+    if (status === "") {
+      toast.error("ادخل حالة الامر");
+      return;
+    }
+    if (description === "") {
+      toast.error("ادخل الوصف");
+      return;
+    }
+    setLoading(true);
+    toast.info("جاري تعديل الامر");
+    let temp = await updateData(`/orders/${operationID}`, { description, status, devices, location, startedAt, IDCode, finishedAt }, token);
+    console.log(temp);
+    if (temp.status === 200) {
+      toast.success("تم تعديل الامر بنجاح");
+      setOpen(false);
+      window.location.reload();
+      setLoading(false);
+    } else {
+      toast.error("حدث خطأ ما");
+      setLoading(false);
+    }
   };
 
   return (
@@ -234,9 +292,10 @@ function OperationCommandsPage() {
                 <p className="text-right mb-2">{t("devices")}</p>
                 <Select
                   styles={customStyles}
-                  options={stats}
+                  options={devicesOptions}
+                  isMulti
                   onChange={(e) => {
-                    setStatus(e.value);
+                    setDevices(e.map((item) => item._id));
                   }}
                 />
               </div>
@@ -267,7 +326,9 @@ function OperationCommandsPage() {
                 <input value={finishedAt} onChange={(e) => setFinishedAt(e.target.value)} className="focus:outline-none border w-full border-black p-2 rounded-lg text-right" type="date" />
               </div>
               <div className="flex justify-center">
-                <button className={loading ? "border-[2px] text-[#cbcfd7] border-[#f0f1f4] py-2 px-12 group rounded-lg" : "border-[2px] text-white hover:text-white bg-[#2B80FF] hover:bg-[#1C48C2]  duration-300 border-[#2B80FF] hover:border-[#1C48C2] py-2 px-12 group rounded-lg"}>{t("edit_operation")}</button>
+                <button onClick={editOperation} className={loading ? "border-[2px] text-[#cbcfd7] border-[#f0f1f4] py-2 px-12 group rounded-lg" : "border-[2px] text-white hover:text-white bg-[#2B80FF] hover:bg-[#1C48C2]  duration-300 border-[#2B80FF] hover:border-[#1C48C2] py-2 px-12 group rounded-lg"}>
+                  {t("edit_operation")}
+                </button>
               </div>
             </div>
           </div>

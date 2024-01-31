@@ -5,7 +5,6 @@ import { getData, updateData, deleteData } from "../Services/APICalls";
 import { useTranslation } from "react-i18next";
 import Modal from "@mui/material/Modal";
 import Select from "react-select";
-
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -25,6 +24,15 @@ function AllUsers() {
   const [selectList, setSelectList] = useState([]);
   const [loading, setLoading] = useState(false);
   const regEmail = /^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/;
+  const [visible, setVisible] = useState("info");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const [value, setValue] = useState("1");
+
+  const handleChange3 = (event, newValue) => {
+    setValue(newValue);
+  };
 
   useEffect(() => {
     getData("/users/all-users", localStorage.getItem("userToken")).then((res) => {
@@ -125,6 +133,30 @@ function AllUsers() {
     }
   };
 
+  const changePassword = async () => {
+    if (password === "") {
+      toast.error("ادخل كلمة المرور");
+      return;
+    }
+    if (confirmPassword === "") {
+      toast.error("ادخل تأكيد كلمة المرور");
+      return;
+    }
+    if (password !== confirmPassword) {
+      toast.error("كلمة المرور غير متطابقة");
+      return;
+    }
+    setLoading(true);
+    let temp = await updateData(`/users/change-password/${userID}`, { password }, token);
+    if (temp.status === 200) {
+      handleClose();
+      location.reload();
+    } else {
+      toast.error("حدث خطأ ما");
+      setLoading(false);
+    }
+  }
+
   return (
     <div className="grow bg-[#F8F9FA]">
       <Header />
@@ -160,28 +192,56 @@ function AllUsers() {
               <div className="flex justify-end mb-2">
                 <i className="fa-solid fa-xmark text-2xl text-[#FF5656] cursor-pointer" onClick={() => handleClose()}></i>
               </div>
-              <h3 className="text-center text-2xl mb-3">{t("edit_user_info")}</h3>
-              <div className="mb-3">
-                <p className="text-right mb-2">{t("name")}</p>
-                <input value={name} onChange={(e) => setName(e.target.value)} className="focus:outline-none border w-full border-black p-2 rounded-lg text-right" type="text" />
-              </div>
-              <div className="mb-3">
-                <p className="text-right mb-2">{t("email")}</p>
-                <input value={email} onChange={(e) => setEmail(e.target.value)} className="focus:outline-none border w-full border-black p-2 rounded-lg text-right" type="text" />
-              </div>
-              <div className="mb-3">
-                <p className="text-right mb-2">{t("permissions")}</p>
-                <Select styles={customStyles} options={options} onChange={handleChange} />
-              </div>
-              <div className="mb-3">
-                <p className="text-right mb-2">{t("institutions")}</p>
-                <Select styles={customStyles} options={selectList} isMulti onChange={handleChange2} />
-              </div>
-              <div className="flex justify-center">
-                <button disabled={loading} onClick={sendData} className={loading ? "border-[2px] text-[#cbcfd7] border-[#f0f1f4] py-2 px-12 group rounded-lg" : "border-[2px] text-white hover:text-white bg-[#2B80FF] hover:bg-[#1C48C2]  duration-300 border-[#2B80FF] hover:border-[#1C48C2] py-2 px-12 group rounded-lg"}>
-                  {t("edit_user")}
+              <div className="flex justify-center gap-3 my-2">
+                <button onClick={() => setVisible("info")} className="border-[2px] text-white hover:text-white bg-[#2B80FF] hover:bg-[#1C48C2]  duration-300 border-[#2B80FF] hover:border-[#1C48C2] p-2 group rounded-lg">
+                  {t("edit_user_info")}
+                </button>
+                <button onClick={() => setVisible("password")} className="border-[2px] text-white hover:text-white bg-[#2B80FF] hover:bg-[#1C48C2]  duration-300 border-[#2B80FF] hover:border-[#1C48C2] p-2 group rounded-lg">
+                  {t("change_password")}
                 </button>
               </div>
+              {visible === "info" ? (
+                <div>
+                  <h3 className="text-center text-2xl mb-3">{t("edit_user_info")}</h3>
+                  <div className="mb-3">
+                    <p className="text-right mb-2">{t("name")}</p>
+                    <input value={name} onChange={(e) => setName(e.target.value)} className="focus:outline-none border w-full border-black p-2 rounded-lg text-right" type="text" />
+                  </div>
+                  <div className="mb-3">
+                    <p className="text-right mb-2">{t("email")}</p>
+                    <input value={email} onChange={(e) => setEmail(e.target.value)} className="focus:outline-none border w-full border-black p-2 rounded-lg text-right" type="text" />
+                  </div>
+                  <div className="mb-3">
+                    <p className="text-right mb-2">{t("permissions")}</p>
+                    <Select styles={customStyles} options={options} onChange={handleChange} />
+                  </div>
+                  <div className="mb-3">
+                    <p className="text-right mb-2">{t("institutions")}</p>
+                    <Select styles={customStyles} options={selectList} isMulti onChange={handleChange2} />
+                  </div>
+                  <div className="flex justify-center">
+                    <button disabled={loading} onClick={sendData} className={loading ? "border-[2px] text-[#cbcfd7] border-[#f0f1f4] py-2 px-12 group rounded-lg" : "border-[2px] text-white hover:text-white bg-[#2B80FF] hover:bg-[#1C48C2]  duration-300 border-[#2B80FF] hover:border-[#1C48C2] py-2 px-12 group rounded-lg"}>
+                      {t("edit_user")}
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div>
+                  <div className="mb-3">
+                    <p className="text-right mb-2">{t("password")}</p>
+                    <input value={password} onChange={(e) => setPassword(e.target.value)} className="focus:outline-none border w-full border-black p-2 rounded-lg text-right" type="password" />
+                  </div>
+                  <div className="mb-3">
+                    <p className="text-right mb-2">{t("confirm_password")}</p>
+                    <input value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="focus:outline-none border w-full border-black p-2 rounded-lg text-right" type="password" />
+                  </div>
+                  <div className="flex justify-center">
+                    <button disabled={loading} onClick={changePassword} className={loading ? "border-[2px] text-[#cbcfd7] border-[#f0f1f4] py-2 px-12 group rounded-lg" : "border-[2px] text-white hover:text-white bg-[#2B80FF] hover:bg-[#1C48C2]  duration-300 border-[#2B80FF] hover:border-[#1C48C2] py-2 px-12 group rounded-lg"}>
+                      {t("change_password")}
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </Modal>

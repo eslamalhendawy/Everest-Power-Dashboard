@@ -74,10 +74,6 @@ function AddOperation() {
       toast.error("ادخل تاريخ البدأ");
       return;
     }
-    if (devices === null) {
-      toast.error("ادخل الاصل");
-      return;
-    }
     if (status === "") {
       toast.error("ادخل حالة الامر");
       return;
