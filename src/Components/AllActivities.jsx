@@ -40,7 +40,7 @@ function AllActivities() {
   return (
     <div className="grow bg-[#F8F9FA]">
       <Header />
-      {userData.role === "admin" ? (
+      {userData.role === "admin" || userData.role === "manager" ? (
         <div className="bg-white m-6 p-6 rounded-lg">
           <div className="flex flex-row-reverse gap-2 items-center mb-6 pb-6 border-b-2">
             <i className="fa-solid fa-box text-2xl text-[#05004E]"></i>
