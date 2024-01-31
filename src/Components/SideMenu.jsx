@@ -184,6 +184,12 @@ function SideMenu() {
                   <p className="text-xs lg:text-base">{t("all_activites")}</p>
                 </li>
               </Link>
+              <Link to="/add-institute">
+                <li className="flex flex-row-reverse items-center p-3 gap-2 text-[#737791] cursor-pointer hover:text-[#000000] duration-300">
+                  <i className="fa-solid fa-plus"></i>
+                  <p className="text-xs lg:text-base">{t("institutions")}</p>
+                </li>
+              </Link>
             </ul>
           </Collapse>
         </ul>

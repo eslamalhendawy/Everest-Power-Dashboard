@@ -92,5 +92,8 @@
     "are_you_sure2": "هل أنت متأكد انك تريد حذف الاصل",
     "are_you_sure3": "هل أنت متأكد انك تريد حذف الامر",
     "edit_device_info": "تعديل بيانات الاصل",
-    "change_password": "تغيير كلمة المرور"
+    "change_password": "تغيير كلمة المرور",
+    "add_inst": "إضافة مؤسسة",
+    "phone_number": "رقم الهاتف",
+    "address": "العنوان"
 }

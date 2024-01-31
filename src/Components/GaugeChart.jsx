@@ -32,7 +32,7 @@ function DoughnutChart({ title }) {
     }
 
     return (
-        <div className=" bg-white rounded-lg p-8">
+        <div className=" bg-white rounded-lg p-8 w-[30%]">
             <h4 className="text-right mb-3 font-bold">{title}</h4>
             <Doughnut data={data} options={options} plugins={textCenter} className="w-[250px] 2xl:w-auto" />
             <div className="flex flex-row-reverse justify-between">
