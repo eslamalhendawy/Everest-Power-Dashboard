@@ -80,6 +80,7 @@ function Maintenance() {
       <Header />
       <div className="bg-white m-2 lg:m-6 p-6 rounded-lg">
         <div className=" flex  justify-between items-start">
+          <div className="flex items-center gap-3">
           <button className="relative flex justify-center items-center bg-white border focus:outline-none shadow text-grey-600 rounded-lg ">
             <p className="px-4 py-3 text-sm" onClick={toggleSelect}>
               {monthName}
@@ -101,6 +102,11 @@ function Maintenance() {
               />
             </div>
           </button>
+          <div className="bg-[#f8f9fa] py-4 px-3 min-w-[250px] flex items-center rounded-xl">
+            <i className="fa-solid fa-magnifying-glass"></i>
+            <input className="bg-[#f8f9fa] focus:outline-none pl-2" type="text" />
+          </div>
+          </div>
           <div className="flex flex-row-reverse gap-2 items-center mb-6 pb-6 border-b-2">
             <i className="fa-solid fa-box text-2xl text-[#05004E]"></i>
             <h2 className="text-right text-[#05004E] font-bold text-2xl ">{t("preventive_maintenance")}</h2>

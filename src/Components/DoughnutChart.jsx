@@ -22,7 +22,10 @@ function DoughnutChart() {
 
   return (
     <div className="bg-white rounded-lg p-8 w-[30%]">
-      <h4 className="text-right mb-3 font-bold">{t("preventive_maintenance")}</h4>
+      <div className="flex items-center justify-between">
+        <i className="fa-solid fa-pen text-xl cursor-pointer"></i>
+        <h4 className="text-right mb-3 font-bold">{t("preventive_maintenance")}</h4>
+      </div>
       <Doughnut data={data} options={options} className="mb-3 w-[250px] 2xl:w-auto " />
       <div className="flex flex-col gap-3">
         <div className="flex flex-row-reverse justify-between items-center">

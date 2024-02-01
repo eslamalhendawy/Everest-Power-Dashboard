@@ -13,8 +13,8 @@ import dayjs from "dayjs";
 import { toast } from "react-toastify";
 import Modal from "@mui/material/Modal";
 import Select from "react-select";
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 
 export const HtmlTooltip = styled(({ className, ...props }) => <Tooltip {...props} classes={{ popper: className }} />)(({ theme }) => ({
   [`& .${tooltipClasses.tooltip}`]: {
@@ -224,7 +224,7 @@ function OperationCommandsPage() {
           <div className="flex items-center  gap-5 ">
             <div className="bg-[#ffffff]  border-2 p-2 rounded-lg flex justify-between items-center gap-2 cursor-pointer h-[44px] hover:bg-[#e6e6e6] transition-all" onClick={onClickHandler}>
               <span>Download</span>
-              <i className="fa-solid fa-download   "></i>
+              <i className="fa-solid fa-download"></i>
             </div>
             <button className="relative flex justify-center items-center bg-white border focus:outline-none shadow text-grey-600 rounded-lg ">
               <p className="px-4 py-3 text-sm" onClick={toggleSelect}>
@@ -247,7 +247,12 @@ function OperationCommandsPage() {
                 />
               </div>
             </button>
+            <div className="bg-[#f8f9fa] py-4 px-3 min-w-[250px] flex items-center rounded-xl">
+              <i className="fa-solid fa-magnifying-glass"></i>
+              <input className="bg-[#f8f9fa] focus:outline-none pl-2" type="text" />
+            </div>
           </div>
+
           <h2 className="text-right text-[#05004E] font-bold text-2xl">{t("operations")}</h2>
         </div>
         <Table dataSource={list} pagination={false}>
