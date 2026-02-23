@@ -1,8 +1,50 @@
-# React + Vite
+🏥 Everest Power
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Everest Power is a web-based management system built for a hospital maintenance company.
+The platform streamlines maintenance operations, improves team coordination, and ensures secure access control across different user roles.
 
-Currently, two official plugins are available:
+🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🔐 Secure Authentication System
+
+User login & session management
+
+Protected routes
+
+Secure credential handling
+
+🛡️ Role-Based Access Control (RBAC)
+
+Admin, Manager, and Technician roles
+
+Granular permission control
+
+Dynamic UI rendering based on user role
+
+🌍 Multi-Language Support (i18n)
+
+Integrated with i18next
+
+Seamless language switching
+
+Scalable translation structure
+
+🖥️ Responsive Design
+
+Optimized for desktop and tablet use
+
+Clean and user-friendly interface
+
+🛠️ Tech Stack
+
+Frontend: React
+
+Styling: Tailwind CSS
+
+Internationalization: i18next
+
+State Management: (Add if used – e.g., Context API / Redux)
+
+Routing: (React Router if used)
+
+Authentication: (JWT / Session-based – specify if applicable
