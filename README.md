@@ -1,50 +1,38 @@
-🏥 Everest Power
+# 🏥 Everest Power
 
-Everest Power is a web-based management system built for a hospital maintenance company.
-The platform streamlines maintenance operations, improves team coordination, and ensures secure access control across different user roles.
+**Everest Power** is a web-based management system developed for a hospital maintenance company.  
+The system streamlines maintenance operations, enhances team coordination, and ensures secure access control across different user roles.
 
-🚀 Features
+---
 
-🔐 Secure Authentication System
+## 🚀 Features
 
-User login & session management
+### 🔐 Secure Authentication
+- User login and session management  
+- Protected routes  
+- Secure credential handling  
 
-Protected routes
+### 🛡️ Role-Based Access Control (RBAC)
+- Multiple user roles (Admin, Manager, Technician)  
+- Granular permission management  
+- Dynamic UI rendering based on user role  
 
-Secure credential handling
+### 🌍 Multi-Language Support
+- Integrated with **i18next**  
+- Seamless language switching  
+- Scalable translation structure  
 
-🛡️ Role-Based Access Control (RBAC)
+### 🖥️ Responsive Design
+- Optimized for desktop and tablet devices  
+- Clean and user-friendly interface  
 
-Admin, Manager, and Technician roles
+---
 
-Granular permission control
+## 🛠️ Tech Stack
 
-Dynamic UI rendering based on user role
-
-🌍 Multi-Language Support (i18n)
-
-Integrated with i18next
-
-Seamless language switching
-
-Scalable translation structure
-
-🖥️ Responsive Design
-
-Optimized for desktop and tablet use
-
-Clean and user-friendly interface
-
-🛠️ Tech Stack
-
-Frontend: React
-
-Styling: Tailwind CSS
-
-Internationalization: i18next
-
-State Management: (Add if used – e.g., Context API / Redux)
-
-Routing: (React Router if used)
-
-Authentication: (JWT / Session-based – specify if applicable
+- **Frontend:** React  
+- **Styling:** Tailwind CSS  
+- **Internationalization:** i18next  
+- **State Management:** Context API (if applicable)  
+- **Routing:** React Router (if applicable)  
+- **Authentication:** JWT / Session-based (if applicable)  
