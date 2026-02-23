@@ -33,6 +33,6 @@ The system streamlines maintenance operations, enhances team coordination, and e
 - **Frontend:** React  
 - **Styling:** Tailwind CSS  
 - **Internationalization:** i18next  
-- **State Management:** Context API (if applicable)  
-- **Routing:** React Router (if applicable)  
-- **Authentication:** JWT / Session-based (if applicable)  
+- **State Management:** Context API  
+- **Routing:** React Router 
+- **Authentication:** JWT / Session-based 
